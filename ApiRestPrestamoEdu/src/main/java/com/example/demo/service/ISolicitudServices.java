@@ -8,9 +8,12 @@ import com.example.demo.models.Solicitud;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface ISolicitudServices {
-	List<Solicitud> GetAllSolicitudes();
-	List<Material> GetAllMateriales();
+	List<Solicitud> GetAllSolicitudes(String estado);
+	Page<Material> findAll(Pageable pageable);
 	List<Alumno> GetAllAlumnos();
 	Solicitud SaveSolicitud(Solicitud entity);
 	Solicitud FindSolicitudById(int id);

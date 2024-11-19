@@ -1,0 +1,21 @@
+.productos-tbody tr {
+    /* Ajusta el padding interno para reducir el espacio arriba y abajo */
+    padding: 2px 0; /* Ajusta según sea necesario */
+}
+
+/* Estilo para los bordes de la tabla */
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid black;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: grey; /* Puedes cambiar esto para que el botón se vea desactivado */
+}
+
+.bg-gradient-custom {
+    background: linear-gradient(180deg, #007563 100%, #009b8c 10%);
+}
+

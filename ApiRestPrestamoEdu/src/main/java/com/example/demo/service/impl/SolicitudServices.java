@@ -5,16 +5,20 @@ import com.example.demo.models.Alumno;
 import com.example.demo.models.Material;
 import com.example.demo.models.Prestamo;
 import com.example.demo.models.Solicitud;
+import com.example.demo.models.Usuario;
 import com.example.demo.repository.IAlumnoRepository;
 import com.example.demo.repository.IMaterialRepository;
 import com.example.demo.repository.IPrestamoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.ISolicitudRepository;
+import com.example.demo.repository.IUsuarioRepository;
 import com.example.demo.service.ISolicitudServices;
 
 import jakarta.annotation.PostConstruct;
@@ -30,21 +34,24 @@ public class SolicitudServices implements ISolicitudServices {
     ISolicitudRepository _solicitudRepository;
     IAlumnoRepository _alumnoRepository;
     IMaterialRepository _materialRepository;
-
-    @Autowired
-    public SolicitudServices(ISolicitudRepository solicitudRepository,IAlumnoRepository alumnoRepository,IMaterialRepository materialRepository){
+    IUsuarioRepository _IUsuarioRepository;
+    
+    public SolicitudServices(ISolicitudRepository solicitudRepository,IAlumnoRepository alumnoRepository,IMaterialRepository materialRepository , IUsuarioRepository usuarioRepository){
         _solicitudRepository = solicitudRepository;
         _alumnoRepository = alumnoRepository;
         _materialRepository = materialRepository;
+        _IUsuarioRepository = usuarioRepository;
     }
     @Override
-    public List<Solicitud> GetAllSolicitudes() {
-        return _solicitudRepository.findAll();
+    public List<Solicitud> GetAllSolicitudes(String estado) {
+    	System.out.println(_solicitudRepository.findByEstado("Generado").size());
+        return _solicitudRepository.findByEstado(estado);
     }
 
     @Override
-    public List<Material> GetAllMateriales() {
-        return _materialRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<Material> findAll(Pageable pageable) {
+        return _materialRepository.findAll(pageable);
     }
 
     @Override
@@ -71,8 +78,10 @@ public class SolicitudServices implements ISolicitudServices {
     @Transactional
     public void registrarSolicitud(SoliDTO soliDTO) {
         try {
+        	Optional<Usuario> optional = _IUsuarioRepository.findByUsername(soliDTO.getUsername());
+        	if(optional.isPresent())
             _solicitudRepository.registrarSolicitud(
-                    soliDTO.getAlumnoCodUsuario(),
+                    optional.get().getCodUsuario(),
                     soliDTO.getMaterialCod(),
                     soliDTO.getCantidad()
             );

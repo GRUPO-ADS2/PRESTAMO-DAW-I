@@ -28,7 +28,8 @@ public class Material {
 
     @Column(name = "Stock", nullable = false)
     private Integer stock;
-
+    
+   
     @Column(name = "Tipo", nullable = false, length = 25)
     private String tipo;
 

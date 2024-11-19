@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 
@@ -14,4 +16,6 @@ public interface ISolicitudRepository extends JpaRepository<Solicitud, Integer> 
 
 	@Procedure(name = "actualizarEstadoSolicitud")
 	void actualizarEstadoSolicitud(Integer p_solicitud_id, String p_nuevo_estado);
+	
+	List<Solicitud> findByEstado(String estado);
 }

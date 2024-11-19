@@ -7,6 +7,9 @@ import com.example.demo.models.Prestamo;
 import com.example.demo.models.Solicitud;
 import com.example.demo.service.ISolicitudServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +18,20 @@ import java.util.List;
 @RestController
 public class SolicitudController {
 
+	@Autowired
     ISolicitudServices solicitudServices;
 
-    @Autowired
+    
     public SolicitudController(ISolicitudServices solicitudServices){this.solicitudServices=solicitudServices;}
 
-    @GetMapping("/solicitudes")
-    public List<Solicitud> getAll() {return solicitudServices.GetAllSolicitudes();}
+    @GetMapping("/solicitudes/{estado}")
+    public List<Solicitud> getAll(@PathVariable String estado) {return solicitudServices.GetAllSolicitudes(estado);}
 
-    @GetMapping("/materiales")
-    public List<Material> getAllMateriales() {return solicitudServices.GetAllMateriales();}
+    @GetMapping("/materiales/{page}")
+    public Page<Material> getAllMateriales(@PathVariable Integer page) {
+    	Pageable pageable = PageRequest.of(page, 15);
+    	return solicitudServices.findAll(pageable);
+    }
 
     @GetMapping("/alumnos")
     public List<Alumno> getAllAlumnos() {return solicitudServices.GetAllAlumnos();}

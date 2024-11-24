@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface IPrestamoServices {
     List<Prestamo> GetAllPrestamos();
-    void registrarPrestamo(PresDTO prestamoDTO);
-    void actualizarPrestamo(int prestamoId, LocalDateTime nuevaFechaPrestamo);
+    Prestamo registrarPrestamo(PresDTO prestamoDTO);
+    Prestamo actualizarPrestamo(int prestamoId, LocalDateTime nuevaFechaPrestamo);
     Prestamo FindPrestamoById(int id);
-    void registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion);
+    Prestamo registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion);
     Integer deletePrestamo(Integer id);
 }

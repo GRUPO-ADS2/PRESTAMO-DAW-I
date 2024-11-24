@@ -16,8 +16,8 @@ import java.util.List;
 
 @RestController
 public class PrestamoController {
-    IPrestamoServices prestamoServices;
-    @Autowired
+	
+    IPrestamoServices prestamoServices;    
     public PrestamoController(IPrestamoServices prestamoServices){this.prestamoServices=prestamoServices;}
 
     @GetMapping("/prestamos")
@@ -29,19 +29,18 @@ public class PrestamoController {
     }
 
     @PostMapping("/prestamo")
-    public ResponseEntity<String> registrarPrestamo(@RequestBody PresDTO presDTO) {
+    public ResponseEntity<?> registrarPrestamo(@RequestBody PresDTO presDTO) {
         try {
-            prestamoServices.registrarPrestamo(presDTO);
-            return ResponseEntity.ok("Prestamo registrado exitosamente");
+            Prestamo pres =prestamoServices.registrarPrestamo(presDTO);
+            return ResponseEntity.ok(pres);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al registrar el préstamo: " + e.getMessage());
         }
     }
     @PostMapping("/devolucion/{id}")
-    public ResponseEntity<String> registrarDevolucion(@PathVariable Integer id) {
+    public ResponseEntity<?> registrarDevolucion(@PathVariable Integer id) {
         try {
-            prestamoServices.registrarDevolucion(id, LocalDateTime.now());
-            return ResponseEntity.ok("Prestamo devuelto exitosamente");
+            return ResponseEntity.ok(prestamoServices.registrarDevolucion(id, LocalDateTime.now()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al devolver el préstamo: " + e.getMessage());
         }
@@ -50,8 +49,7 @@ public class PrestamoController {
     public ResponseEntity<?> actualizarPrestamo(@PathVariable Integer id) {
         try {
             // Llamar al servicio para actualizar el préstamo usando la fecha actual del sistema
-            prestamoServices.actualizarPrestamo(id, LocalDateTime.now());
-            return ResponseEntity.ok().body("Prestamo actualizado");
+            return ResponseEntity.ok(prestamoServices.actualizarPrestamo(id, LocalDateTime.now()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
         }

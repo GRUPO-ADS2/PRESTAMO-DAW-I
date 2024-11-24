@@ -29,24 +29,25 @@ public class PrestamoServices implements IPrestamoServices {
 
     @Override
     @Transactional
-    public void registrarPrestamo(PresDTO presDTO) {
+    public Prestamo registrarPrestamo(PresDTO presDTO) {
         try {
             LocalDateTime fechaPrestamoActual = LocalDateTime.now();
 
-            _prestamoRepository.registrarPrestamo(
+            return _prestamoRepository.registrarPrestamo(
                     presDTO.getSolicitudId(),
                     fechaPrestamoActual
             );
         } catch (Exception e) {
             System.err.println("Error al registrar el prestamo: " + e.getMessage());
         }
+        return null;
     }
 
     @Override
     @Transactional
-    public void actualizarPrestamo(int prestamoId, LocalDateTime _nuevaFechaPrestamo) {
+    public Prestamo actualizarPrestamo(int prestamoId, LocalDateTime _nuevaFechaPrestamo) {
         LocalDateTime nuevaFechaPrestamo = LocalDateTime.now();
-        _prestamoRepository.actualizarPrestamo(prestamoId, nuevaFechaPrestamo);
+        return _prestamoRepository.actualizarPrestamo(prestamoId, nuevaFechaPrestamo);
     }
 
 
@@ -61,17 +62,18 @@ public class PrestamoServices implements IPrestamoServices {
 
     @Override
     @Transactional
-    public void registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion) {
+    public Prestamo registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion) {
         try {
             LocalDateTime _fechaDevolucion = LocalDateTime.now();
 
-            _prestamoRepository.registrarDevolucion(
+            return _prestamoRepository.registrarDevolucion(
                     prestamoId,_fechaDevolucion
             );
         } catch (Exception e) {
             System.err.println("Error al registrar la devolución del prestamo: "
                     + e.getMessage());
         }
+        return null;
     }
 
 

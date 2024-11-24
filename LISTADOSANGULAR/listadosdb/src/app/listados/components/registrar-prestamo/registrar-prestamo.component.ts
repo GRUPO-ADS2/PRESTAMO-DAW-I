@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { Prestamo } from '../../models/Prestamo';
 import { PrestamoService } from '../../services/prestamo.service';
 import Swal from 'sweetalert2';
+import { FormPrestamoComponent } from '../form-prestamo/form-prestamo.component';
 
 @Component({
   selector: 'app-registrar-prestamo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,FormPrestamoComponent],
   templateUrl: './registrar-prestamo.component.html',
   styleUrl: './registrar-prestamo.component.css'
 })
@@ -26,12 +27,7 @@ export class RegistrarPrestamoComponent implements OnInit {
     this.SolicitudServ.ListSolicitudes('Generado').subscribe( solicitudes =>
       this.solicitudes = solicitudes
     )
-  }
-  aumentarDias(fecha: Date,diastoadd: number): Date{
-    const f = fecha
-    f?.setDate(diastoadd)
-    return f
-  }
+  }  
   registrarPrestamo(){
     if (this.idMaterialSolicitude.length===4 && this.verificarSolicitud()) {
       const PressDTO = {

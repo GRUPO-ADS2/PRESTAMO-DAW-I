@@ -67,28 +67,24 @@ public class SolicitudServices implements ISolicitudServices {
 
     @Override
     public Solicitud FindSolicitudById(int id) {
-        Optional<Solicitud> rowInDB = _solicitudRepository.findById(id);
-        if (rowInDB.isPresent())
-            return rowInDB.get();
-        else
-            return new Solicitud();
+        return _solicitudRepository.findById(id).orElseGet(Solicitud::new);
     }
 
     @Override
     @Transactional
     public void registrarSolicitud(SoliDTO soliDTO) {
         try {
-        	Optional<Usuario> optional = _IUsuarioRepository.findByUsername(soliDTO.getUsername());
-        	if(optional.isPresent())
-            _solicitudRepository.registrarSolicitud(
-                    optional.get().getCodUsuario(),
-                    soliDTO.getMaterialCod(),
-                    soliDTO.getCantidad()
-            );
+            _IUsuarioRepository.findByUsername(soliDTO.getUsername())
+                    .ifPresent(usuario -> _solicitudRepository.registrarSolicitud(
+                            usuario.getCodUsuario(),
+                            soliDTO.getMaterialCod(),
+                            soliDTO.getCantidad()
+                    ));
         } catch (Exception e) {
             System.err.println("Error al registrar la solicitud: " + e.getMessage());
         }
     }
+
     @Override
     public void actualizarEstadoSolicitud(Integer solicitudId, String nuevoEstado) {
         _solicitudRepository.actualizarEstadoSolicitud(solicitudId, nuevoEstado);
@@ -96,27 +92,20 @@ public class SolicitudServices implements ISolicitudServices {
 
     @Override
     public Integer updateSolicitud(Integer id, Solicitud solicitud) {
-        Optional<Solicitud> existingSolicitud = _solicitudRepository.findById(id);
-        if (existingSolicitud.isPresent()) {
-            Solicitud SolicitudToUpdate = existingSolicitud.get();
-            SolicitudToUpdate.setCantidad(solicitud.getCantidad());
-            SolicitudToUpdate.setMaterial(solicitud.getMaterial());
-            _solicitudRepository.save(SolicitudToUpdate);
+        return _solicitudRepository.findById(id).map(existingSolicitud -> {
+            existingSolicitud.setCantidad(solicitud.getCantidad());
+            existingSolicitud.setMaterial(solicitud.getMaterial());
+            _solicitudRepository.save(existingSolicitud);
             return 1;
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
 
     @Override
     public Integer deleteSolicitud(Integer id) {
-        Optional<Solicitud> optionalSolicitud = _solicitudRepository.findById(id);
-        if (optionalSolicitud.isPresent()) {
+        return _solicitudRepository.findById(id).map(solicitud -> {
             _solicitudRepository.deleteById(id);
             return 1;
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
 
 }

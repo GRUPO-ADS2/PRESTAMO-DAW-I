@@ -53,11 +53,7 @@ public class PrestamoServices implements IPrestamoServices {
 
     @Override
     public Prestamo FindPrestamoById(int id) {
-        Optional<Prestamo> rowInDB = _prestamoRepository.findById(id);
-        if (rowInDB.isPresent())
-            return rowInDB.get();
-        else
-            return new Prestamo();
+        return _prestamoRepository.findById(id).orElseGet(Prestamo::new);
     }
 
     @Override
@@ -65,7 +61,6 @@ public class PrestamoServices implements IPrestamoServices {
     public Prestamo registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion) {
         try {
             LocalDateTime _fechaDevolucion = LocalDateTime.now();
-
             return _prestamoRepository.registrarDevolucion(
                     prestamoId,_fechaDevolucion
             );
@@ -79,12 +74,9 @@ public class PrestamoServices implements IPrestamoServices {
 
     @Override
     public Integer deletePrestamo(Integer id) {
-        Optional<Prestamo> optionalPrestamo = _prestamoRepository.findById(id);
-        if (optionalPrestamo.isPresent()) {
+        return _prestamoRepository.findById(id).map(prestamo -> {
             _prestamoRepository.deleteById(id);
             return 1;
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
 }

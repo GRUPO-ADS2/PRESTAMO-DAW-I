@@ -35,7 +35,6 @@ public class PenalizacionServices implements IPenalizacionServices {
     public void registrarPenalizacion(PenaDTO penaDTO) {
         try {
             LocalDateTime _fechaPenalizacion = LocalDateTime.now();
-
             _penalizacionRepository.registrarPenalizacion(
                     penaDTO.getPrestamoId(),
                     _fechaPenalizacion,
@@ -48,35 +47,25 @@ public class PenalizacionServices implements IPenalizacionServices {
 
     @Override
     public Penalizacion FindPenalizacionById(int id) {
-        Optional<Penalizacion> rowInDB = _penalizacionRepository.findById(id);
-        if (rowInDB.isPresent())
-            return rowInDB.get();
-        else
-            return new Penalizacion();
+        return _penalizacionRepository.findById(id).orElseGet(Penalizacion::new);
     }
 
     @Override
     public Integer updatePenalizacion(Integer id, Penalizacion penalizacion) {
-        Optional<Penalizacion> existingPenalizacion = _penalizacionRepository.findById(id);
-        if (existingPenalizacion.isPresent()) {
-            Penalizacion PenalizacionToUpdate = existingPenalizacion.get();
-            PenalizacionToUpdate.setFechaPenalizacion(penalizacion.getFechaPenalizacion());
-            PenalizacionToUpdate.setDescripcion(penalizacion.getDescripcion());
-            _penalizacionRepository.save(PenalizacionToUpdate);
+        return _penalizacionRepository.findById(id).map(existingPenalizacion -> {
+            existingPenalizacion.setFechaPenalizacion(penalizacion.getFechaPenalizacion());
+            existingPenalizacion.setDescripcion(penalizacion.getDescripcion());
+            _penalizacionRepository.save(existingPenalizacion);
             return 1;
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
 
     @Override
     public Integer deletePenalizacion(Integer id) {
-        Optional<Penalizacion> optionalPenalizacion = _penalizacionRepository.findById(id);
-        if (optionalPenalizacion.isPresent()) {
+        return _penalizacionRepository.findById(id).map(penalizacion -> {
             _penalizacionRepository.deleteById(id);
             return 1;
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
+
 }

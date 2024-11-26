@@ -39,17 +39,14 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	}
 
 	@Override
-	public Optional<Usuario> update(Usuario usuaurio, Long id) {
-		Optional<Usuario> optional = _IUsuarioRepository.findById(id);
-		if (optional.isPresent()) {
-			Usuario usu = optional.get();
-			usu.setEnabled(usu.getEnabled());
-			usu.setRoles(usu.getRoles());
-			usu.setUsername(usu.getUsername());
-			_IUsuarioRepository.save(usu);
-			return Optional.of(usu);
-		}
-		return Optional.empty();
+	public Optional<Usuario> update(Usuario usuario, Long id) {
+		return _IUsuarioRepository.findById(id)
+				.map(usu -> {
+					usu.setEnabled(usuario.getEnabled());
+					usu.setRoles(usuario.getRoles());
+					usu.setUsername(usuario.getUsername());
+					return _IUsuarioRepository.save(usu);
+				});
 	}
 
 	@Override

@@ -1,4 +1,6 @@
-package com.example.demo.oauth2.filter;
+package com.example.demo.jwt.filter;
+
+import static com.example.demo.jwt.filter.JwtValuesConfig.*;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -27,7 +29,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static com.example.demo.oauth2.filter.JwtValuesConfig.*;
 
 //se encarga de recibir los datos de inciaio de session
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{

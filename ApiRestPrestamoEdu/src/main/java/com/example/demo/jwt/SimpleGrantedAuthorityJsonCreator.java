@@ -1,4 +1,4 @@
-package com.example.demo.oauth2;
+package com.example.demo.jwt;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

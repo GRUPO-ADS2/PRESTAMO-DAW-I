@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thumeleaf.org">
+
+<head th:replace="~{layout/layout :: head}">
+
+<body id="page-top">
+        <header th:replace="~{layout/layout :: header}"></header>
+        
+		<div class="cotainer-fluid">
+			<div class="content">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="myTable">
+                                <th>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>NOMBRE</td>
+                                        <td>STOCK</td>
+                                        <td>TIPO</td>
+                                    </tr>
+                                </th>
+                                <tbody th:each="material : ${materiales}">
+                                    <tr>
+                                        <td th:text="${material.codMaterial}"></td>
+                                        <td th:text="${material.nombre}"></td>
+                                        <td th:text="${material.stock}"></td>
+                                        <td th:text="${material.tipo}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		<div>
+         <div th:replace="~{layout/layout :: script}"></div>
+</body>
+
+</html>

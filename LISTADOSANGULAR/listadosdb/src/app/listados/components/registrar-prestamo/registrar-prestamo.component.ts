@@ -31,11 +31,12 @@ export class RegistrarPrestamoComponent implements OnInit {
   registrarPrestamo(){
     if (this.idMaterialSolicitude.length===4 && this.verificarSolicitud()) {
       const PressDTO = {
-        solicitudId: this.solicitudfinded?.idSolicitud,
+        solicitudId: this.solicitudfinded!.idSolicitud,
         fechaPrestamo: new Date()
       }
-      this.PrestamoServ.RegistrarPrestamo(PressDTO).subscribe(
-      )
+      this.PrestamoServ.RegistrarPrestamo(PressDTO).subscribe(() =>{
+        
+      })
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -48,9 +49,9 @@ export class RegistrarPrestamoComponent implements OnInit {
         timer: 1500
       });
       
-      this.idMaterialSolicitude = ''
-      this.solicitudes = this.solicitudes.filter(soli => soli.idSolicitud!=this.solicitudfinded?.idSolicitud)
     }
+    this.solicitudes = this.solicitudes.filter(soli => soli.idSolicitud!=this.solicitudfinded?.idSolicitud)
+    this.idMaterialSolicitude = ''
   }
   private verificarSolicitud(): boolean {
     this.solicitudfinded = this.solicitudes.find(soli => 

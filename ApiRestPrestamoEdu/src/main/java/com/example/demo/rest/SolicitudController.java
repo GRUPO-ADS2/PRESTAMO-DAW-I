@@ -18,57 +18,62 @@ import java.util.List;
 @RestController
 public class SolicitudController {
 
-	@Autowired
+    @Autowired
     ISolicitudServices solicitudServices;
 
-    
-    public SolicitudController(ISolicitudServices solicitudServices){this.solicitudServices=solicitudServices;}
+    public SolicitudController(ISolicitudServices solicitudServices) {
+	this.solicitudServices = solicitudServices;
+    }
 
     @GetMapping("/solicitudes/{estado}")
-    public List<Solicitud> getAll(@PathVariable String estado) {return solicitudServices.GetAllSolicitudes(estado);}
+    public List<Solicitud> getAll(@PathVariable String estado) {
+	return solicitudServices.GetAllSolicitudes(estado);
+    }
 
     @GetMapping("/materiales/{page}")
     public Page<Material> getAllMateriales(@PathVariable Integer page) {
-    	Pageable pageable = PageRequest.of(page, 15);
-    	return solicitudServices.findAll(pageable);
+	Pageable pageable = PageRequest.of(page, 15);
+	return solicitudServices.findAll(pageable);
     }
 
     @GetMapping("/alumnos")
-    public List<Alumno> getAllAlumnos() {return solicitudServices.GetAllAlumnos();}
+    public List<Alumno> getAllAlumnos() {
+	return solicitudServices.GetAllAlumnos();
+    }
 
     @GetMapping("/solicitud/{id}")
     public Solicitud getAll(@PathVariable int id) {
-        return solicitudServices.FindSolicitudById(id);
+	return solicitudServices.FindSolicitudById(id);
     }
 
     @PostMapping("/solicitud")
     public ResponseEntity<String> registrarSolicitud(@RequestBody SoliDTO soliDTO) {
-        try {
-            solicitudServices.registrarSolicitud(soliDTO);
-            return ResponseEntity.ok("Solicitud registrada");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al registrar la solicitud: " + e.getMessage());
-        }
+	try {
+	    solicitudServices.registrarSolicitud(soliDTO);
+	    return ResponseEntity.ok("Solicitud registrada");
+	} catch (Exception e) {
+	    return ResponseEntity.badRequest().body("Error al registrar la solicitud: " + e.getMessage());
+	}
     }
 
-@PutMapping("/solicitud/{id}")
+    @PutMapping("/solicitud/{id}")
     public ResponseEntity<?> actualizarEstadoSolicitud(@PathVariable Integer id, @RequestParam String nuevoEstado) {
-        try {
-            solicitudServices.actualizarEstadoSolicitud(id, nuevoEstado);
-            return ResponseEntity.ok().body("{success: true}");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
-        }
+	try {
+	    solicitudServices.actualizarEstadoSolicitud(id, nuevoEstado);
+	    return ResponseEntity.ok().body("{success: true}");
+	} catch (Exception e) {
+	    return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
+	}
     }
 
     @DeleteMapping("/solicitud/{id}")
     public ResponseEntity<Integer> deleteSolicitud(@PathVariable Integer id) {
-        Integer deleted = solicitudServices.deleteSolicitud(id);
-        if (deleted == 1) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+	Integer deleted = solicitudServices.deleteSolicitud(id);
+	if (deleted == 1) {
+	    return new ResponseEntity<>(HttpStatus.OK);
+	} else {
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo.oauth2;
+package com.example.demo.jwt;
 
 import java.util.Arrays;
 
@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,9 +21,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.example.demo.oauth2.filter.JwtAuthenticationFilter;
-import com.example.demo.oauth2.filter.JwtValidadtionFilter;
+import com.example.demo.jwt.filter.JwtAuthenticationFilter;
+import com.example.demo.jwt.filter.JwtValidadtionFilter;
 
 @Configuration
 public class SpringSecurityConfig  {	
@@ -43,7 +45,7 @@ public class SpringSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	return http.authorizeHttpRequests((authz) -> authz
-    			.requestMatchers("/login","/**").permitAll()
+    			.requestMatchers("/", "/login", "/materiales", "/css/**", "/js/**", "/images/**").permitAll()
     			//.requestMatchers(HttpMethod.GET,"/materiales").permitAll()
     			//.requestMatchers(HttpMethod.POST,"/solicitud").hasAnyRole("ADMIN","USER")
     			.requestMatchers("/solicitudes").hasAnyRole("ADMIN")
@@ -61,7 +63,7 @@ public class SpringSecurityConfig  {
     CorsConfigurationSource configurationSource() {
     	CorsConfiguration config = new CorsConfiguration();
     	config.setAllowedOriginPatterns(Arrays.asList("*"));
-    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8080"));
     	config.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
     	config.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
     	config.setAllowCredentials(true);

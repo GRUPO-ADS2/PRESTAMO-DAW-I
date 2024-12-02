@@ -1,4 +1,6 @@
-package com.example.demo.oauth2.filter;
+package com.example.demo.jwt.filter;
+
+import static com.example.demo.jwt.filter.JwtValuesConfig.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,7 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.example.demo.oauth2.SimpleGrantedAuthorityJsonCreator;
+import com.example.demo.jwt.SimpleGrantedAuthorityJsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;
@@ -23,7 +25,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static com.example.demo.oauth2.filter.JwtValuesConfig.*;
 
 public class JwtValidadtionFilter extends BasicAuthenticationFilter {
 	

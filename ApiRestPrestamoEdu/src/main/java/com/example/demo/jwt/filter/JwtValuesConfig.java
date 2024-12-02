@@ -1,4 +1,4 @@
-package com.example.demo.oauth2.filter;
+package com.example.demo.jwt.filter;
 
 import javax.crypto.SecretKey;
 

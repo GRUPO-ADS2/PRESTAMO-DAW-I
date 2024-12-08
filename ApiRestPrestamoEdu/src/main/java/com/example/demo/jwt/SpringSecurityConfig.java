@@ -45,13 +45,13 @@ public class SpringSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	return http.authorizeHttpRequests((authz) -> authz
-    			.requestMatchers("/", "/login", "/materiales", "/css/**", "/js/**", "/images/**").permitAll()
+    			.requestMatchers("/", "/login", "/**").permitAll()
     			//.requestMatchers(HttpMethod.GET,"/materiales").permitAll()
     			//.requestMatchers(HttpMethod.POST,"/solicitud").hasAnyRole("ADMIN","USER")
     			.requestMatchers("/solicitudes").hasAnyRole("ADMIN")
     			.anyRequest().authenticated()
     			)
-    			//.cors(cors -> cors.configurationSource(configurationSource()))
+    			.cors(cors -> cors.configurationSource(configurationSource()))
     			.addFilter(new JwtAuthenticationFilter(authenticationManager()))
     			.addFilter(new JwtValidadtionFilter(authenticationManager()))
     			.csrf(csrf -> csrf.disable())
@@ -63,7 +63,7 @@ public class SpringSecurityConfig  {
     CorsConfigurationSource configurationSource() {
     	CorsConfiguration config = new CorsConfiguration();
     	config.setAllowedOriginPatterns(Arrays.asList("*"));
-    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8080"));
+    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081"));
     	config.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
     	config.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
     	config.setAllowCredentials(true);

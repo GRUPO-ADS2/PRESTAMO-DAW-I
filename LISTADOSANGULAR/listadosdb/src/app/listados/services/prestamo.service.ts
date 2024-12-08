@@ -9,7 +9,7 @@ import { Prestamo } from '../models/Prestamo';
 export class PrestamoService {
 
   constructor(private http: HttpClient) { }
-  private urlBase:string = 'http://localhost:8080';
+  private urlBase:string = 'http://localhost:8081';
 
   RegistrarPrestamo(PressDTO:any): Observable<Prestamo>{
     return this.http.post<Prestamo>(this.urlBase+"/prestamo",PressDTO)

@@ -22,7 +22,13 @@ public class MaterialService implements IMaterialService{
     @Transactional
     @Override
     public Material save(Material material) {
-	return _IMaterialRepository.save(material);
+    	try {
+			
+    		return _IMaterialRepository.save(material);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return null;
     }
     
     @Transactional
@@ -44,7 +50,16 @@ public class MaterialService implements IMaterialService{
     @Transactional(readOnly = true)
     @Override
     public List<Material> findAll() {	
-	return _IMaterialRepository.findAll();
+	return (List<Material> )_IMaterialRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+	@Override
+	public Material getById(Integer id) {		
+		Optional<Material> optional = _IMaterialRepository.findById(id);
+		if(optional.isPresent())
+		 return optional.get();
+		return new Material();
+	}
 
 }

@@ -10,7 +10,7 @@ import { Solicitud } from '../models/Solicitud';
 export class SolicitudService {
 
   materiales: Material[]= []
-  private urlBase:string = 'http://localhost:8080';
+  private urlBase:string = 'http://localhost:8081';
 
   constructor(private http: HttpClient) { }
 

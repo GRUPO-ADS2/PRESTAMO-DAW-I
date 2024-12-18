@@ -4,7 +4,7 @@
             <div class="form-group col-md-6">
                 <label>Categoría</label>
                 <select class="form-control" [(ngModel)]="categoria" (change)="filtrarMateriales()">
-                    <option value="" selected>TODOS</option>
+                    <option value="TODOS">TODOS</option>
                     <option value="libros">Libros</option>
                     <option value="revistas">revistas</option>
                     <option value="instrumentos">Instrumentos</option>
@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (material of materialesFiltrados; track $index)
+                @for (material of materiales; track $index)
                 {
                     <tr    class=" {{materialIsSelected(material)? 'bg-success': ''}}">
                         <td>{{material.codMaterial}}</td>

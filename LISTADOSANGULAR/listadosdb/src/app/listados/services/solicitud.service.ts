@@ -15,8 +15,9 @@ export class SolicitudService {
   constructor(private http: HttpClient) { }
 
 
-  ListMateriales (page:number) : Observable<any>{
-    return this.http.get<any>(`${this.urlBase}/materiales/${page}`);
+  ListMateriales (page:number,cat:string, nom:string) : Observable<any>{
+    let param  = nom == "" ? "" : '?nom='+nom
+    return this.http.get<any>(`${this.urlBase}/materiales/${page}/${cat}${param}`);
   }
   create(SoliDTO:any): Observable<any>{
     return this.http.post<any>(this.urlBase+'/solicitud',SoliDTO)

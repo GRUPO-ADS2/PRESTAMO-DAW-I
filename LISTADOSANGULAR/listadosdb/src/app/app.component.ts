@@ -7,13 +7,14 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { RegistrarPrestamoComponent } from './listados/components/registrar-prestamo/registrar-prestamo.component';
 import SockJS from 'sockjs-client';
 import { Client , IStompSocket} from '@stomp/stompjs';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,RouterLink,
-    RouterLinkActive
+    RouterLinkActive,FormsModule
    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

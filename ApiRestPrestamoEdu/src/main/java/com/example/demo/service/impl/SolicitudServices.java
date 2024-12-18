@@ -44,9 +44,9 @@ public class SolicitudServices implements ISolicitudServices {
     @Transactional
     public Page<Material> findAll(String categoria, String buscar, Pageable pageable) {
     	List<Material> materiales = _materialRepository.filtrarMateriales(categoria, buscar);
-    	materiales.forEach(m ->
-    	System.out.println(m.toString())
-    	);
+
+    	System.out.println(categoria);
+
     	int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), materiales.size());
         return new PageImpl<>(materiales.subList(start, end), pageable, materiales.size());

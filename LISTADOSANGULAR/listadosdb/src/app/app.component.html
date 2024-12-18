@@ -23,135 +23,115 @@
     </div>
   </div>
 </nav>
---> 
-<div id="wrapper"> 
-         <!-- Content Wrapper -->
-         <!-- Sidebar -->
-         <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
-           
-           <!-- Sidebar - Brand -->
-           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-             <div class="sidebar-brand-icon rotate-n-10">
-               <i class="fa-solid fa-book-open"></i>
-              </div>
-              <div class="sidebar-brand-text mx-2">Innova School</div>
-            </a>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-              </li>
-              
-              <!-- Divider -->
-              <hr class="sidebar-divider">
-              
-              <!-- Heading -->
-              <div class="sidebar-heading">
-                Operaciones
-              </div>
-              
-              <!-- Nav Item - TAbles -->
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
-                aria-expanded="true" aria-controls="collapseTables">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tablas</span>
-              </a>
-              <div id="collapseTables" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                  <h6 class="collapse-header">Mis Registros:</h6>
-                  <a class="collapse-item" routerLinkActive="active" routerLink="/listaUsuarios">Usuarios</a>
-                  <a class="collapse-item" routerLinkActive="active" routerLink="/listasolicitudes">Solicitudes</a>
-                  <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Prestamos</a>
-                  <a class="collapse-item" routerLinkActive="active" routerLink="/listapenalizaciones">Penalizaciones</a>
-                </div>
-              </div>
-            </li>  
-            <!-- Nav Item - Solicitudes -->
-            <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-              aria-expanded="true" aria-controls="collapsePages">
-              <i class="fa-solid fa-book-medical"></i>
-              <span>Solicitud</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones:</h6>
-                <a class="collapse-item" routerLinkActive="active" routerLink="/listaUsuarios">Solicitar un Prestamo</a>            
-              </div>
-            </div>
-          </li>  
-          <!-- Nav Item - Prestamos -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSoli"
-            aria-expanded="true" aria-controls="collapseSoli">
-            <i class="fa-solid fa-book-bookmark"></i>
-            <span>Prestamo</span>
-          </a>
-          <div id="collapseSoli" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Acciones:</h6>
-              <a class="collapse-item" routerLinkActive="active" routerLink="/registrarPrestamo">Registrar Prestamos</a>
-              <a class="collapse-item" routerLinkActive="active" routerLink="/listasolicitudes">Registrar Devolucion</a>
-              <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Registrar</a>
-            </div>
-          </div>
-        </li>
-        <!-- Nav Item - Penalizaciones -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePena"
-          aria-expanded="true" aria-controls="collapsePena">
-          <i class="fa-solid fa-book-skull"></i>
-          <span>Penalizacion</span>
-        </a>
-        <div id="collapsePena" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Mis Registros:</h6>
-            <a class="collapse-item" routerLinkActive="active" routerLink="/listaUsuarios">Usuarios</a>
-            <a class="collapse-item" routerLinkActive="active" routerLink="/listasolicitudes">Solicitudes</a>
-            <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Prestamos</a>
-            <a class="collapse-item" routerLinkActive="active" routerLink="/listapenalizaciones">Penalizaciones</a>
-          </div>
-        </div>
-      </li> 
-       <!-- Divider -->
-       <hr class="sidebar-divider">            
-            <!-- Nav Item - SESSION -->
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-solid fa-door-open"></i>
-                <span>Cerrar Sesion</span></a>
-              </li>
-              
-              <!-- Divider -->
-              <hr class="sidebar-divider d-none d-md-block">
-              
-              <!-- Sidebar Toggler (Sidebar) -->
-              <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-              </div>
-              
-            </ul>
-            <!-- End of Sidebar -->
-            
-      <div id="content-wrapper" class="d-flex flex-column"> 
-            
-          <div id="content" class="mt-4">
-              <router-outlet></router-outlet>
-          </div>          
+-->
+<div id="wrapper">
+  <!-- Content Wrapper -->
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
 
-          <footer>                  
-              <div class="container my-auto">
-                  <div class="copyright text-center my-auto">
-                      <span>Copyright &copy; Your Website 2024</span>
-                  </div>
-              </div>            
-          </footer>  
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+      <div class="sidebar-brand-icon rotate-n-10">
+        <i class="fa-solid fa-book-open"></i>
       </div>
+      <div class="sidebar-brand-text mx-2">Innova School</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Operaciones
+    </div>
+
+    
+    <!-- Nav Item - Solicitudes -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+        aria-controls="collapsePages">
+        <i class="fa-solid fa-book-medical"></i>
+        <span>Solicitud</span>
+      </a>
+      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Acciones:</h6>
+          <a class="collapse-item" routerLinkActive="active" routerLink="/listasolicitudes">Solicitar un Prestamo</a>
+        </div>
+      </div>
+    </li>
+    <!-- Nav Item - Prestamos -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSoli" aria-expanded="true"
+        aria-controls="collapseSoli">
+        <i class="fa-solid fa-book-bookmark"></i>
+        <span>Prestamo</span>
+      </a>
+      <div id="collapseSoli" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Acciones:</h6>
+          <a class="collapse-item" routerLinkActive="active" routerLink="/registrarPrestamo">Registrar Prestamos</a>
+          <a class="collapse-item" routerLinkActive="active" routerLink="#">Registrar Devolucion</a>
+          <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Registrar Renovacion</a>
+        </div>
+      </div>
+    </li>
+    <!-- Nav Item - Penalizaciones -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePena" aria-expanded="true"
+        aria-controls="collapsePena">
+        <i class="fa-solid fa-book-skull"></i>
+        <span>Penalizacion</span>
+      </a>
+      <div id="collapsePena" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Mis Registros:</h6>
+          <a class="collapse-item" routerLinkActive="active" routerLink="">Registrar Penalizacion</a>
+        </div>
+      </div>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Nav Item - SESSION -->
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fas fa-solid fa-door-open"></i>
+        <span>Cerrar Sesion</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <div id="content" class="mt-4">
+      <router-outlet></router-outlet>
+    </div>
+
+    <footer>
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Your Website 2024</span>
+        </div>
+      </div>
+    </footer>
+  </div>
 </div>
-  

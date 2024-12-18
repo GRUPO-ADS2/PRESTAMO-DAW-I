@@ -7,9 +7,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      URL_BASE_MYSQL: jdbc:mysql://innovaschool:3306/bdinnovaschool?&serverTimezone=UTC
+      URL_BASE_MYSQL: mysql://autorack.proxy.rlwy.net:37508/railway
       USER_MYSQL: root
-      PASS_MYSQL: mysql
+      PASS_MYSQL: vDhBUClOnaHBhrSfPoWbkthClZjGpIyT
     restart: always
     depends_on:
       innovaschool:
@@ -38,3 +38,7 @@ services:
       - "4200:4000"  # Mapea el puerto 4200 del contenedor al puerto 4000 del host
     restart: always
     
+
+#spring.datasource.url=jdbc:mysql://localhost:3306/bdinnovaschool?createDatabaseIfNotExist=true
+#spring.datasource.username=root
+#spring.datasource.password=ibanez-1r

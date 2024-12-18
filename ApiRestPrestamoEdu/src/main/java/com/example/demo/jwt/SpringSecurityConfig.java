@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,9 @@ public class SpringSecurityConfig  {
   
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
+    
+    @Value("${ORIGIN_ANGULAR}")
+    private String origenAngular;
     
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -63,7 +67,7 @@ public class SpringSecurityConfig  {
     CorsConfigurationSource configurationSource() {
     	CorsConfiguration config = new CorsConfiguration();
     	config.setAllowedOriginPatterns(Arrays.asList("*"));
-    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081"));
+    	config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081",origenAngular));
     	config.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
     	config.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
     	config.setAllowCredentials(true);

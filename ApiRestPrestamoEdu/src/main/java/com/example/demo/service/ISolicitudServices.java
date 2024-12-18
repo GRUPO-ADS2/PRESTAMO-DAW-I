@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ISolicitudServices {
 	List<Solicitud> GetAllSolicitudes(String estado);
-	Page<Material> findAll(Pageable pageable);
+	Page<Material> findAll(String categoria, String buscar,Pageable pageable);
 	List<Alumno> GetAllAlumnos();
 	Solicitud SaveSolicitud(Solicitud entity);
 	Solicitud FindSolicitudById(int id);

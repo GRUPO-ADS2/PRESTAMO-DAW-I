@@ -8,6 +8,7 @@ import com.example.demo.repository.IAlumnoRepository;
 import com.example.demo.repository.IMaterialRepository;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -40,9 +41,15 @@ public class SolicitudServices implements ISolicitudServices {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Page<Material> findAll(Pageable pageable) {
-        return _materialRepository.findAll(pageable);
+    @Transactional
+    public Page<Material> findAll(String categoria, String buscar, Pageable pageable) {
+    	List<Material> materiales = _materialRepository.filtrarMateriales(categoria, buscar);
+    	materiales.forEach(m ->
+    	System.out.println(m.toString())
+    	);
+    	int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), materiales.size());
+        return new PageImpl<>(materiales.subList(start, end), pageable, materiales.size());
     }
 
     @Override

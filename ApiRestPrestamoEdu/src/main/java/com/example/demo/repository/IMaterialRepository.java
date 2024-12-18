@@ -16,11 +16,11 @@ import com.example.demo.models.Material;
 import jakarta.validation.constraints.Null;
 @Repository
 public interface IMaterialRepository extends CrudRepository<Material, Integer>{
+	
+	@Cacheable(value = "material")
 	@Procedure(name = "filtrarMateriales")
 	List<Material> filtrarMateriales(String categoria, String buscar );
 	
-	@Cacheable(value = "material")
-	Page<Material> findAll(Pageable pageable);
 	
 	@CacheEvict(value = "material", allEntries = true)
 	Material save(Material material);

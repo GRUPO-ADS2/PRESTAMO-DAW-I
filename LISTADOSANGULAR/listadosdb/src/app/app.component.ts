@@ -13,9 +13,8 @@ import { Client , IStompSocket} from '@stomp/stompjs';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,RouterLink,
-    RouterLinkActive, SolicitudComponent,
-    PrestamoComponent, PenalizacionComponent ,
-    RegistrarPrestamoComponent],
+    RouterLinkActive
+   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

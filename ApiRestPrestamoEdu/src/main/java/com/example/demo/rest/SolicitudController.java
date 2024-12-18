@@ -30,10 +30,11 @@ public class SolicitudController {
 	return solicitudServices.GetAllSolicitudes(estado);
     }
 
-    @GetMapping("/materiales/{page}")
-    public Page<Material> getAllMateriales(@PathVariable Integer page) {
+    @GetMapping("/materiales/{page}/{cat}/{nom}")
+    public Page<Material> getAllMateriales(@PathVariable Integer page, @PathVariable String cat,
+    		@PathVariable(required = false) String nom) {
 	Pageable pageable = PageRequest.of(page, 15);
-	return solicitudServices.findAll(pageable);
+	return solicitudServices.findAll(cat, nom,pageable);
     }
 
     @GetMapping("/alumnos")

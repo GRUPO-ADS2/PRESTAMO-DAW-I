@@ -17,11 +17,9 @@ import java.util.List;
 @RestController
 public class PenalizacionController {
 
-    IPenalizacionServices penalizacionServices;
-    @Autowired
-    public PenalizacionController(IPenalizacionServices penalizacionServices){
-        this.penalizacionServices=penalizacionServices;
-    }
+	@Autowired
+    private IPenalizacionServices penalizacionServices;
+ 
 
     @GetMapping("/penalizaciones")
     public List<Penalizacion> getAll() {return penalizacionServices.GetAllPenalizaciones();}
@@ -51,14 +49,14 @@ public class PenalizacionController {
         }
     }
 
-    @DeleteMapping("/penalizacion/{id}")
-    public ResponseEntity<Integer> deletePenalizacion(@PathVariable Integer id) {
-        Integer deleted = penalizacionServices.deletePenalizacion(id);
-        if (deleted == 1) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @DeleteMapping("/penalizacion/{id}")
+//    public ResponseEntity<Integer> deletePenalizacion(@PathVariable Integer id) {
+//        Integer deleted = penalizacionServices.deletePenalizacion(id);
+//        if (deleted == 1) {
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
 }

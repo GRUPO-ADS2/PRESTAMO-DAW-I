@@ -24,7 +24,7 @@ public class PrestamoController {
     public List<Prestamo> getAll() {return prestamoServices.GetAllPrestamos();}
 
     @GetMapping("/prestamo/{id}")
-    public Prestamo getAll(@PathVariable int id) {
+    public Prestamo getById(@PathVariable int id) {
         return prestamoServices.FindPrestamoById(id);
     }
 
@@ -37,7 +37,7 @@ public class PrestamoController {
             return ResponseEntity.badRequest().body("Error al registrar el préstamo: " + e.getMessage());
         }
     }
-    @PostMapping("/devolucion/{id}")
+    @PutMapping("/devolucion/{id}")
     public ResponseEntity<?> registrarDevolucion(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok(prestamoServices.registrarDevolucion(id, LocalDateTime.now()));
@@ -56,13 +56,13 @@ public class PrestamoController {
     }
 
 
-    @DeleteMapping("/prestamo/{id}")
-    public ResponseEntity<Integer> deletePrestamo(@PathVariable Integer id) {
-        Integer deleted = prestamoServices.deletePrestamo(id);
-        if (deleted == 1) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @DeleteMapping("/prestamo/{id}")
+//    public ResponseEntity<Integer> deletePrestamo(@PathVariable Integer id) {
+//        Integer deleted = prestamoServices.deletePrestamo(id);
+//        if (deleted == 1) {
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

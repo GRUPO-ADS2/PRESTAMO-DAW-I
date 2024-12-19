@@ -1,6 +1,7 @@
 export class Usuario {
     codUsuario!:number;    
-    username!:String;    
+    username!:String;
+    password!:String;    
     enabled!:boolean;
     roles!:String[]
 }

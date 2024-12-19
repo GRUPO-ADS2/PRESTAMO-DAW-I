@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { SharingDataService } from '../../services/sharing-data.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,7 @@ export class AuthComponent {
 
   user : Usuario;
 
-  constructor() {
+  constructor(private sharingDataService: SharingDataService) {
     this.user = new Usuario();
   }
 
@@ -23,13 +24,9 @@ export class AuthComponent {
         title: 'Error',
         text: 'Username o password incorrectos',
         icon: 'error'
-      })
+      });
     }else{
-      Swal.fire({
-        title: 'Bienvenido',
-        text: 'Usuario logueado correctamente',
-        icon: 'success'
-      })
+      this.sharingDataService.handlerLoginEventEmitter.emit({username: this.user.username, contrasenia: this.user.password});   
     }
   }
 }

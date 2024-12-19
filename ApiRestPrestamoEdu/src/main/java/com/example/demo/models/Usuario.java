@@ -45,6 +45,15 @@ public class Usuario {
     @NotNull
     private Boolean enabled;
     
+    @Column(name = "account_non_expired")
+	private Boolean accountNonExpired;
+
+	@Column(name = "account_non_locked")
+	private Boolean accountNonLocked;
+
+	@Column(name = "credentials_non_expired")
+	private Boolean credentialsNonExpired;
+    
     @ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     @Column(name = "Role", nullable = false, length = 20)
     private Set<Role> roles;

@@ -7,6 +7,7 @@ import { Prestamo } from '../models/Prestamo';
   providedIn: 'root'
 })
 export class PrestamoService {
+  [x: string]: any;
 
   constructor(private http: HttpClient) { }
   private urlBase:string = 'http://localhost:8081';
@@ -29,6 +30,10 @@ export class PrestamoService {
 
   actualizarPrestamo(idprestamo: number): Observable<Prestamo>{
     return this.http.put<Prestamo>(this.urlBase+"/prestamo/",idprestamo)
+  }
+
+  findbyEstado (estado: string): Observable<Prestamo[]>{
+    return this.http.get<Prestamo[]>(this.urlBase+"/prestamos/"+estado)
   }
 
 }

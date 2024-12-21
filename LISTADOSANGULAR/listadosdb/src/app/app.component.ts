@@ -95,7 +95,6 @@ export class AppComponent implements OnInit {
   })
   }
 
-
   get admin(): boolean {
     return this.authServide.isAdmin();
   }

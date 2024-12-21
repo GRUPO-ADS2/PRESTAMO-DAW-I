@@ -20,8 +20,11 @@ export class PrestamoComponent implements OnInit {
   prestamos: Prestamo[] = []
   constructor(private service : ListadoService, private servicePrestamo : PrestamoService){}
   ngOnInit(): void {
-    this.service.listarPrestamos().subscribe(arg => {
+    this.servicePrestamo.findbyEstado('En Curso').subscribe(arg => {
       this.prestamos = arg;
+      this.servicePrestamo.findbyEstado('Penalizado').subscribe(args => {
+          this.prestamos = [... this.prestamos , ... args];
+      });
     });
   }
   emitir(id:number){

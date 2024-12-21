@@ -13,4 +13,5 @@ public interface IPrestamoServices {
     Prestamo FindPrestamoById(int id);
     Prestamo registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion);
     Integer deletePrestamo(Integer id);
+    List<Prestamo> findbyEstado(String estado);
 }

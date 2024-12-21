@@ -26,25 +26,24 @@
 
 
 
-        <div class="content-wrapper" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+        <div class="content p-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
             (scrolled)="scrolledInfinite()">
             @for (material of materiales; track $index)
             {
-            <div class="card shadow-lg row">
-                <div class="col-md-9">
-                    <ul>
 
-                        <li>{{material.codMaterial}}</li>
-                        <li>{{material.nombre}}</li>
-                        <li>{{material.descripcion}}</li>
-                        <li>{{material.tipo}}</li>
-                        <li>{{material.stock}}</li>
-                    </ul>
+            <div class="card shadow-lg bg-{{materialIsSelected(material)?'info':''}} p-2" (click)="seleccionarMaterial(material)">
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul>
 
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary agregar-material" (click)="seleccionarMaterial(material)">
-                        {{materialIsSelected(material)? 'Eliminar': 'Agregar'}}</button>
+                            <li>{{material.codMaterial}}</li>
+                            <li>{{material.nombre}}</li>
+                            <li>{{material.descripcion}}</li>
+                            <li>{{material.tipo}}</li>
+                            <li>{{material.stock}}</li>
+                        </ul>
+
+                    </div>
                 </div>
             </div>
 

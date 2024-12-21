@@ -59,7 +59,6 @@ public class SolicitudServices implements ISolicitudServices {
     }
 
     @Override
-
     public Solicitud SaveSolicitud(Solicitud entity) {
         Solicitud solicitudSaved = _solicitudRepository.save(entity);
         return solicitudSaved;

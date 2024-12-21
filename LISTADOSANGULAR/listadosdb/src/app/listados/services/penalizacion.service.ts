@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Penalizacion } from '../models/Penalizacion';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,15 @@ export class PenalizacionService {
     return this.http.get<Penalizacion>(this.urlBase+ "/penalizacion/"+idPenalizacion);
   }
 
-  registrarPenalizacion(penalizacion: any): Observable<Penalizacion>{
-    return this.http.post<Penalizacion>(this.urlBase+ "/penalizacion", penalizacion);
+  registrarPenalizacion(penaDTO: any): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(this.urlBase+ "/penalizacion", penaDTO, { headers, responseType: 'text' });
   }
-
+  penalizar(prestamo: any, descripcion: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { prestamo, descripcion };
+    return this.http.post(this.urlBase, body, { headers, responseType: 'text' });
+  }
   actualizarPenalizacion(idPenalizacion: number): Observable<Penalizacion>{
     return this.http.put<Penalizacion>(this.urlBase+ "/penalizacion", idPenalizacion);
   }

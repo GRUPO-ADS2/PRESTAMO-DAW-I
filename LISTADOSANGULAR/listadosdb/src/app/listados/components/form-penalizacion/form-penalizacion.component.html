@@ -1,0 +1,29 @@
+<div class="d-flex flex-column">
+    <div id="content" class="mt4">
+            <div class="form-group" hidden>
+                <label for="idPrestamo">ID Préstamo</label>
+                <input type="text" class="form-control"  [(ngModel)]="prestamo.idPrestamo" name="idPrestamo" readonly>
+            </div>
+            <div class="form-group">
+                <label for="Alumno_Usuario_CodUsuario">Código Alumno</label>
+                <input type="text" class="form-control"  [(ngModel)]="prestamo.solicitud.alumno.usuarioCodUsuario" name="usuarioCodUsuario" readonly>
+            </div>
+            <div class="form-group">
+                <label for="Material_CodMaterial">Código Material</label>
+                <input type="text" class="form-control"  [(ngModel)]="prestamo.solicitud.material.codMaterial" name="codMaterial" readonly>
+            </div>
+            <div class="form-group">
+                <label for="FechaPrestamo">Fecha de Préstamo</label>
+                <input type="datetime-local" class="form-control"  [(ngModel)]="prestamo.fechaPrestamo" name="fechaPrestamo" readonly>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="text" class="form-control" [(ngModel)]="prestamo.estado" name="estado" readonly>
+            </div>  
+            <div class="form-group">
+                <label for="observacion">Observación material</label>
+                <textarea type="text" class="form-control" [(ngModel)]="descripcion" name="estado" ></textarea>
+            </div>          
+            <button class="btn btn-success btn-sm" (click)="penalizar()">Confirmar</button>      
+    </div>
+</div>

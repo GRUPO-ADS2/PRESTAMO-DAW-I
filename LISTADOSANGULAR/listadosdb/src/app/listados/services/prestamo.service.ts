@@ -19,8 +19,8 @@ export class PrestamoService {
     return this.http.get<Prestamo[]>(this.urlBase+"/prestamos")
   }
 
-  ListPrestamosById(idPrestamo: number): Observable<Prestamo>{
-    return this.http.get<Prestamo>(this.urlBase+"/prestamo"+idPrestamo)
+  GetPrestamoById(idPrestamo: number): Observable<Prestamo>{
+    return this.http.get<Prestamo>(this.urlBase+"/prestamo/"+idPrestamo)
   }
 
   registrarDevolucion(codPrestamo: number): Observable<Prestamo>{

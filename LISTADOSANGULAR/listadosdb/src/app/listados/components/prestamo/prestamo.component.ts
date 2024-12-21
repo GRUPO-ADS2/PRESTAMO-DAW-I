@@ -1,24 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { ListadoService } from '../../services/listado.service';
 import { Prestamo } from '../../models/Prestamo';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormPrestamosComponent } from '../form-prestamos/form-prestamos.component';
+import { PrestamoService } from '../../services/prestamo.service';
+import { FormsModule } from '@angular/forms';
+import { FormPenalizacionComponent } from '../form-penalizacion/form-penalizacion.component';
 
 @Component({
   selector: 'app-prestamo',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe,CommonModule, FormPrestamosComponent,FormsModule, FormPenalizacionComponent],
   templateUrl: './prestamo.component.html',
   styleUrl: './prestamo.component.css'
 })
 export class PrestamoComponent implements OnInit {
-
+  prestamoEmit:Prestamo = new Prestamo();
+  opcion:number = 1;
   prestamos: Prestamo[] = []
-  constructor(private service : ListadoService){}
+  constructor(private service : ListadoService, private servicePrestamo : PrestamoService){}
   ngOnInit(): void {
     this.service.listarPrestamos().subscribe(arg => {
       this.prestamos = arg;
     });
   }
-
+  emitir(id:number){
+    this.servicePrestamo.GetPrestamoById(id).subscribe((prestamo)=>{
+      this.prestamoEmit = prestamo;
+      this.opcion=1;
+    })
+  }
+  emitirDevolucion(id:number){
+    this.servicePrestamo.GetPrestamoById(id).subscribe((prestamo)=>{
+      this.prestamoEmit = prestamo;
+      this.opcion=2;
+    })
+  }
+  emitirPenalizacion(id:number){
+    this.servicePrestamo.GetPrestamoById(id).subscribe((prestamo)=>{
+      this.prestamoEmit = prestamo;
+      this.opcion=3;
+    })
+  }
 
 }

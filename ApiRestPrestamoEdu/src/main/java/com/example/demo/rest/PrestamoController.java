@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class PrestamoController {
@@ -54,6 +57,16 @@ public class PrestamoController {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
         }
     }
+    
+    @GetMapping("/prestamos/{estado}")
+    public ResponseEntity<?> getMethodName(@PathVariable String estado) {
+        try {
+	    return ResponseEntity.ok(prestamoServices.findbyEstado(estado));
+	} catch (Exception e) {
+	    return ResponseEntity.badRequest().body("error al obtener prestamos");
+	}
+    }
+    
 
 
 //    @DeleteMapping("/prestamo/{id}")

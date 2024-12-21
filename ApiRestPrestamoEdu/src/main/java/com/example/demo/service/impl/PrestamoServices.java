@@ -26,6 +26,8 @@ public class PrestamoServices implements IPrestamoServices {
     public List<Prestamo> GetAllPrestamos() {
         return _prestamoRepository.findAll();
     }
+    
+    
 
     @Override
     @Transactional
@@ -78,5 +80,11 @@ public class PrestamoServices implements IPrestamoServices {
             _prestamoRepository.deleteById(id);
             return 1;
         }).orElse(0);
+    }
+
+
+    @Override
+    public List<Prestamo> findbyEstado(String estado) {
+	return _prestamoRepository.findByEstado(estado);
     }
 }

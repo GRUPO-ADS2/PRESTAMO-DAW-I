@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Build-Jdk-Spec: 22
-Implementation-Title: ApiRestPrestamoEdu
-Implementation-Version: 3.3.6
-Created-By: Maven Integration for Eclipse
-

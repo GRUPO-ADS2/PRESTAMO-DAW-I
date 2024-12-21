@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -15,4 +16,6 @@ public interface IPrestamoRepository extends JpaRepository<Prestamo, Integer> {
 	Prestamo registrarDevolucion(int prestamoId, LocalDateTime fechaDevolucion);
 	@Procedure(name = "actualizarPrestamo")
 	Prestamo actualizarPrestamo(int prestamoId, LocalDateTime nuevaFechaPrestamo);
+	
+	List<Prestamo> findByEstado(String estado);
 }

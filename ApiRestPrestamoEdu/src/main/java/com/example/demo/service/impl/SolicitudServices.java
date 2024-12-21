@@ -43,7 +43,7 @@ public class SolicitudServices implements ISolicitudServices {
     @Override
     @Transactional
     public Page<Material> findAll(String categoria, String buscar, Pageable pageable) {
-    	List<Material> materiales = _materialRepository.filtrarMateriales(categoria, buscar);
+    	List<Material> materiales = _materialRepository.filtrarMateriales(categoria, buscar!=null?buscar:"");
 
     	System.out.println(categoria);
 

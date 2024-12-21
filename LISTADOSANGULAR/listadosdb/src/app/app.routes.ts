@@ -7,8 +7,8 @@ import { AuthComponent } from './listados/components/auth/auth.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },  // Ruta para la página principal
-    { path: 'listasolicitudes', component: SolicitudComponent, canActivate: [authGuard] },  // Ruta para la página de "About"
+    { path: '', redirectTo: '/listasolicitudes', pathMatch: 'full' },  // Ruta para la página principal
+    { path: 'listasolicitudes', component: SolicitudComponent}, 
     { path: 'listapenalizaciones', component: PenalizacionComponent , canActivate: [authGuard]},
     { path: 'listaprestamos', component: PrestamoComponent , canActivate: [authGuard]},
     { path: 'registrarPrestamo', component: RegistrarPrestamoComponent , canActivate: [authGuard]},

@@ -27,7 +27,7 @@
 <div id="wrapper">
   <!-- Content Wrapper -->
   <!-- Sidebar -->
-  <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
+  <ul *ngIf="authenticated" class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -104,7 +104,7 @@
     <hr class="sidebar-divider">
     <!-- Nav Item - SESSION -->
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" (click)="handlerLogouot()">
         <i class="fas fa-solid fa-door-open"></i>
         <span>Cerrar Sesion</span></a>
     </li>
@@ -120,18 +120,10 @@
   </ul>
   <!-- End of Sidebar -->
 
-  <div id="content-wrapper" class="d-flex flex-column">
+  <div id="content-wrapper" class="d-flex flex-column bg-{{authenticated?'light':'primary'}} ">
 
     <div id="content" class="mt-4">
       <router-outlet></router-outlet>
     </div>
-
-    <footer>
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2024</span>
-        </div>
-      </div>
-    </footer>
   </div>
 </div>

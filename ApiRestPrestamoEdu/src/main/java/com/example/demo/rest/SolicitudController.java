@@ -33,7 +33,7 @@ public class SolicitudController {
 	@GetMapping("/materiales/{page}/{cat}")
 	public Page<Material> getAllMateriales(@PathVariable Integer page, @PathVariable String cat,
 			@RequestParam (required = false) String nom) {
-		Pageable pageable = PageRequest.of(page, 15);
+		Pageable pageable = PageRequest.of(page, 5);
 		return solicitudServices.findAll(cat, nom, pageable);
 	}
 

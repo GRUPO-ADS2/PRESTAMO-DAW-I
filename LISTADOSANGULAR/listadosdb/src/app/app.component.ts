@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SolicitudComponent } from './listados/components/solicitud/solicitud.component';
 import { PrestamoComponent } from './listados/components/prestamo/prestamo.component';
 import { PenalizacionComponent } from './listados/components/penalizacion/penalizacion.component';
@@ -12,13 +12,15 @@ import { SharingDataService } from './listados/services/sharing-data.service';
 import { AuthService } from './listados/services/auth.service';
 import { error } from 'console';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
+import { response } from 'express';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink,
-    RouterLinkActive, FormsModule
+    RouterLinkActive, FormsModule,CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -27,7 +29,10 @@ export class AppComponent implements OnInit {
 
   title = 'listadosdb';
   private client: Client = new Client();
-  constructor(private sharingData: SharingDataService, private authServide: AuthService) { }
+  constructor(private sharingData: SharingDataService, 
+              private authServide: AuthService,
+               private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.handlerLogin();
@@ -51,12 +56,22 @@ export class AppComponent implements OnInit {
     this.sharingData.handlerLoginEventEmitter.subscribe(({username,contrasenia})=>{
     console.log(username,contrasenia)
     
-    this.authServide.loginUser({username,contrasenia}).subscribe((data) => {
-      console.log(data);
-      next: (data: any) => {
-        const token = data.token;
+    this.authServide.loginUser({username,contrasenia}).subscribe({
+
+      next: response => {
+        const token = response.token;
         console.log(token);
-        const payload = JSON.parse(atob(token.split(".")[1]));
+        const payload = this.authServide.getPayLoad(token);
+
+        const user ={username: payload.sub}
+        const login ={
+          user,
+          isAuth:true,
+          isAdmin: payload.isAdmin
+        }
+        this.authServide.user = login;
+        this.authServide.token = token;
+        
         console.log(payload);
         Swal.fire({
           position: "top-end",
@@ -65,13 +80,13 @@ export class AppComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-      }
-      error: (error: any) => {
-        console.log(error.error);
+        this.router.navigate(['/listasolicitudes']);
+      },
+      error: error => {
           Swal.fire({
             position: "top-end",
             icon: "error",
-            title: error.error,
+            title: error.error.message,
             showConfirmButton: false,
             timer: 1500
           });        
@@ -80,4 +95,17 @@ export class AppComponent implements OnInit {
   })
   }
 
+
+  get admin(): boolean {
+    return this.authServide.isAdmin();
+  }
+
+  get authenticated(): boolean {
+    return this.authServide.authenticated();
+  }
+
+  handlerLogouot(){
+    return this.authServide.logout();
+    this.router.navigate(['/login']);
+  }  
 }

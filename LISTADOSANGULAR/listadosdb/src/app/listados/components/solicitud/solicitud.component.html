@@ -14,40 +14,41 @@
             <div class="form-group col-md-6">
                 <label for="buscar">Buscar</label>
                 <div class="input-group">
-                    <input type="text" [(ngModel)]="searchMaterial" class="form-control" placeholder="Buscar..." (input)="filtrarMateriales()">                   
+                    <input type="text" [(ngModel)]="searchMaterial" class="form-control" placeholder="Buscar..."
+                        (input)="filtrarMateriales()">
                     <div class="input-group-append mx-4">
-                        <button class="btn btn-warning" (click)="create()"  [disabled]="materialsSelected.length===0? true: false">Soliciftar</button>
+                        <button class="btn btn-warning" (click)="create()"
+                            [disabled]="materialsSelected.length===0? true: false">Soliciftar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered " infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="scrolledInfinite()">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Tipo</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (material of materiales; track $index)
-                {
-                    <tr    class=" {{materialIsSelected(material)? 'bg-success': ''}}">
-                        <td>{{material.codMaterial}}</td>
-                        <td>{{material.nombre}}</td>
-                        <td>{{material.descripcion}}</td>
-                        <td>{{material.tipo}}</td>
-                        <td>{{material.stock}}</td>
-                        <td>
-                            <button class="btn btn-primary agregar-material"  (click)="seleccionarMaterial(material)">
-                                {{materialIsSelected(material)? 'Eliminar': 'Agregar'}}</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+
+
+        <div class="content-wrapper" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+            (scrolled)="scrolledInfinite()">
+            @for (material of materiales; track $index)
+            {
+            <div class="card shadow-lg row">
+                <div class="col-md-9">
+                    <ul>
+
+                        <li>{{material.codMaterial}}</li>
+                        <li>{{material.nombre}}</li>
+                        <li>{{material.descripcion}}</li>
+                        <li>{{material.tipo}}</li>
+                        <li>{{material.stock}}</li>
+                    </ul>
+
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary agregar-material" (click)="seleccionarMaterial(material)">
+                        {{materialIsSelected(material)? 'Eliminar': 'Agregar'}}</button>
+                </div>
+            </div>
+
+            }
+        </div>
     </div>
 </div>

@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
   }
 
   handlerLogouot(){
-    return this.authServide.logout();
     this.router.navigate(['/login']);
+    return this.authServide.logout();
   }  
 }

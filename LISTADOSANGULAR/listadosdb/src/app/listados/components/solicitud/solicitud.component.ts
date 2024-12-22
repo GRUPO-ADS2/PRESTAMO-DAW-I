@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-solicitud',
   standalone: true,
-  imports: [FormsModule, InfiniteScrollDirective],
+  imports: [FormsModule, InfiniteScrollDirective,CommonModule],
   templateUrl: './solicitud.component.html',
   styleUrl: './solicitud.component.css'
 })

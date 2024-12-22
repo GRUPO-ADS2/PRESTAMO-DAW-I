@@ -7,12 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { Prestamo } from '../../models/Prestamo';
 import { PrestamoService } from '../../services/prestamo.service';
 import Swal from 'sweetalert2';
-import { FormPrestamoComponent } from '../form-prestamo/form-prestamo.component';
 
 @Component({
   selector: 'app-registrar-prestamo',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormPrestamoComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './registrar-prestamo.component.html',
   styleUrl: './registrar-prestamo.component.css'
 })
@@ -29,27 +28,35 @@ export class RegistrarPrestamoComponent implements OnInit {
     )
   }
   registrarPrestamo() {
-    if (this.idMaterialSolicitude.length === 4 && this.verificarSolicitud()) {
+    if (this.idMaterialSolicitude.length >=4 && this.verificarSolicitud()) {
       const PressDTO = {
         solicitudId: this.solicitudfinded?.idSolicitud,
         fechaPrestamo: new Date()
       }
-      this.PrestamoServ.RegistrarPrestamo(PressDTO).subscribe(() => {
-        this.idMaterialSolicitude = '';
-        console.log(this.idMaterialSolicitude)
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title:
-            "Solicitud: " + this.solicitudfinded?.idSolicitud +
-            "\nMaterial: " + this.solicitudfinded?.material.nombre +
-            "\nAlumno: " + this.solicitudfinded?.alumno.nombresApellidos +
-            "\naprobada!!",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        this.solicitudes = this.solicitudes.filter(soli => soli.idSolicitud != this.solicitudfinded?.idSolicitud);
-      });
+      this.PrestamoServ.RegistrarPrestamo(PressDTO).subscribe(
+        {
+          next: response => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "registrar Prestamo",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.solicitudes = this.solicitudes.filter(soli => soli.idSolicitud != this.solicitudfinded?.idSolicitud);
+            this.idMaterialSolicitude = ""            
+          },
+          error: error => {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Error al enviar la solicitud",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        }
+      );
 
     }
   }
@@ -57,7 +64,7 @@ export class RegistrarPrestamoComponent implements OnInit {
   private verificarSolicitud(): boolean {
     this.solicitudfinded = this.solicitudes.find(soli =>
       soli.alumno.usuarioCodUsuario.toString() === this.idAlumno && soli.material.codMaterial.toString() === this.idMaterialSolicitude)
-    if (this.solicitudes != null) {
+    if (this.solicitudfinded != null) {
       return true
     }
     return false

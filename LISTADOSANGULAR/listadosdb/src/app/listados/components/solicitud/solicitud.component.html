@@ -28,26 +28,41 @@
 
         <div class="content p-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
             (scrolled)="scrolledInfinite()">
+            <div class="row">
             @for (material of materiales; track $index)
             {
+                <div class="col-md-6 mb-4">
 
-            <div class="card shadow-lg bg-{{materialIsSelected(material)?'info':''}} p-2" (click)="seleccionarMaterial(material)">
-                <div class="row">
-                    <div class="col-md-9">
-                        <ul>
-
-                            <li>{{material.codMaterial}}</li>
-                            <li>{{material.nombre}}</li>
-                            <li>{{material.descripcion}}</li>
-                            <li>{{material.tipo}}</li>
-                            <li>{{material.stock}}</li>
-                        </ul>
-
+                    <div class="card shadow-lg bg-{{materialIsSelected(material)?'info':''}} p-2 " (click)="seleccionarMaterial(material)">
+                            <div class="material-details ">
+                                <ul class="material-list">
+                                    <li>
+                                        <strong><label class="label">Código Material : </label></strong>
+                                        <span>{{"  "+material.codMaterial}}</span>
+                                    </li>
+                                    <li>
+                                        <strong><label class="label">Nombre : </label></strong>
+                                        <span>{{"  "+material.nombre}}</span>
+                                    </li>
+                                    <li>
+                                        <strong><label class="label">Descripción : </label></strong>
+                                        <span>{{"  "+material.descripcion}}</span>
+                                    </li>
+                                    <li>
+                                        <strong><label class="label">Tipo : </label></strong>
+                                        <span>{{"  "+material.tipo}}</span>
+                                    </li>
+                                    <li>
+                                        <strong><label class="label">Stock : </label></strong>
+                                        <span>{{"  "+material.stock}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    
+                }
             </div>
-
-            }
         </div>
     </div>
 </div>

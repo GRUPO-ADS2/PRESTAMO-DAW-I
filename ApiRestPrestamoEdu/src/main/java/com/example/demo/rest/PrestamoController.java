@@ -34,8 +34,8 @@ public class PrestamoController {
     @PostMapping("/prestamo")
     public ResponseEntity<?> registrarPrestamo(@RequestBody PresDTO presDTO) {
         try {
-            Prestamo pres =prestamoServices.registrarPrestamo(presDTO);
-            return ResponseEntity.ok(pres);
+            prestamoServices.registrarPrestamo(presDTO);
+            return ResponseEntity.ok("Préstamo registrado con éxito");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al registrar el préstamo: " + e.getMessage());
         }
@@ -43,7 +43,8 @@ public class PrestamoController {
     @PutMapping("/devolucion/{id}")
     public ResponseEntity<?> registrarDevolucion(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(prestamoServices.registrarDevolucion(id, LocalDateTime.now()));
+            prestamoServices.registrarDevolucion(id, LocalDateTime.now());
+            return ResponseEntity.ok("Prestamo devuelto con exito");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al devolver el préstamo: " + e.getMessage());
         }
@@ -52,7 +53,8 @@ public class PrestamoController {
     public ResponseEntity<?> actualizarPrestamo(@PathVariable Integer id) {
         try {
             // Llamar al servicio para actualizar el préstamo usando la fecha actual del sistema
-            return ResponseEntity.ok(prestamoServices.actualizarPrestamo(id, LocalDateTime.now()));
+            prestamoServices.actualizarPrestamo(id, LocalDateTime.now());
+            return ResponseEntity.ok("Prestamo actualizado con exito");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
         }

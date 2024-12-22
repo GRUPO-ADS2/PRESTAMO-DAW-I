@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PenalizacionService } from '../../services/penalizacion.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-penalizacion',
@@ -29,7 +30,11 @@ export class FormPenalizacionComponent {
           title: "Préstamo penalizado con éxito",
           showConfirmButton: false,
           timer: 1500,
-        });
+        }).then(() => {
+          this.router.navigate(['/listaprestamos']).then(() => {
+            window.location.reload();
+          });
+        }); 
       },
       error: (error) => {
         Swal.fire({
@@ -42,5 +47,7 @@ export class FormPenalizacionComponent {
       }
     });
   }
-  constructor(private servicePena: PenalizacionService) {}
+  constructor(private servicePena: PenalizacionService,
+              private router: Router
+  ) {}
 }

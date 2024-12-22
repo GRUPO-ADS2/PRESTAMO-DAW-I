@@ -22,11 +22,6 @@ export class PenalizacionService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.urlBase+ "/penalizacion", penaDTO, { headers, responseType: 'text' });
   }
-  penalizar(prestamo: any, descripcion: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = { prestamo, descripcion };
-    return this.http.post(this.urlBase, body, { headers, responseType: 'text' });
-  }
   actualizarPenalizacion(idPenalizacion: number): Observable<Penalizacion>{
     return this.http.put<Penalizacion>(this.urlBase+ "/penalizacion", idPenalizacion);
   }

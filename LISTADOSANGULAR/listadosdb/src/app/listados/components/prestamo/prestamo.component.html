@@ -55,7 +55,7 @@
     </div>
 
     <div class="col md-6" *ngIf="opcion == 1 || opcion == 2">
-      <app-form-prestamos [prestamo] = "prestamoEmit"></app-form-prestamos>
+      <app-form-prestamos [option]="opcion" [prestamo] = "prestamoEmit"></app-form-prestamos>
     </div>
     <div class="col md-6" *ngIf="opcion == 3">
       <app-form-penalizacion [prestamo] = "prestamoEmit"></app-form-penalizacion>

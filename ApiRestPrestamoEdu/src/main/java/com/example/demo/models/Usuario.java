@@ -54,7 +54,7 @@ public class Usuario {
 	@Column(name = "credentials_non_expired")
 	private Boolean credentialsNonExpired;
     
-    @ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @Column(name = "Role", nullable = false, length = 20)
     private Set<Role> roles;
     

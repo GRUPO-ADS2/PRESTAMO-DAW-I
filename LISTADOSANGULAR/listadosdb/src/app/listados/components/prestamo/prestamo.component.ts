@@ -22,7 +22,7 @@ export class PrestamoComponent implements OnInit {
   ngOnInit(): void {
     this.servicePrestamo.findbyEstado('En Curso').subscribe(arg => {
       this.prestamos = arg;
-      this.servicePrestamo.findbyEstado('Penalizado').subscribe(args => {
+      this.servicePrestamo.findbyEstado('Tardío').subscribe(args => {
           this.prestamos = [... this.prestamos , ... args];
       });
     });

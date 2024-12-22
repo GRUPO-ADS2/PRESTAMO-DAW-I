@@ -49,10 +49,23 @@ public class SpringSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	return http.authorizeHttpRequests((authz) -> authz
-    			.requestMatchers("/", "/login", "/**").permitAll()
-    			//.requestMatchers(HttpMethod.GET,"/materiales").permitAll()
-    			//.requestMatchers(HttpMethod.POST,"/solicitud").hasAnyRole("ADMIN","USER")
-    			//.requestMatchers("/solicitudes").hasAnyRole("ADMIN")
+    			//TODOS LOS USUARIOS
+    			.requestMatchers("/","/**", "/login").permitAll()
+    			.requestMatchers(HttpMethod.GET,"/solicitud/**").hasAnyRole("ADMIN","USER")
+    			.requestMatchers(HttpMethod.POST,"/solicitud/**").hasAnyRole("ADMIN","USER")
+    			.requestMatchers(HttpMethod.GET,"/materiales/**").hasAnyRole("ADMIN","USER")
+    			//ADMIN
+    			.requestMatchers(HttpMethod.GET,"/prestamo/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.POST,"/prestamo/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.GET,"/prestamos/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.PUT,"/prestamo/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.PUT,"/devolucion/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.GET,"/penalizacion/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.POST,"/penalizacion").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.PUT,"/penalizacion/**").hasAnyRole("ADMIN")
+    			.requestMatchers(HttpMethod.GET,"/penalizaciones").hasAnyRole("ADMIN")    			
+    			
+    			.requestMatchers("/solicitudes").hasAnyRole("ADMIN")
     			.anyRequest().authenticated()
     			)
     			.cors(cors -> cors.configurationSource(configurationSource()))

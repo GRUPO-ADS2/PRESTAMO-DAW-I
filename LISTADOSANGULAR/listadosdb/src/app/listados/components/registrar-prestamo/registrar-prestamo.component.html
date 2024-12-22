@@ -1,35 +1,47 @@
-<div class="content g-8 p-4">
-    <div class="row">
-        <div class="table-responsive">
-            <h4>Registrar Préstamo</h4>
-            <input type="text" class="form-control" [(ngModel)]="idMaterialSolicitude" (input)="registrarPrestamo()" size="4" placeholder="Ingresar codigo de material solicitado..."  >
-            <input type="text" class="form-control" [(ngModel)]="idAlumno" (input)="registrarPrestamo()" size="4" placeholder="Ingresar codigo de Alumno..." >
+<div class="container-fluid p-4 g-8">
 
-            <table class="table table-sm text-center">
-                <thead class="bg-info">
-                    <tr>
-                        <th>Código Alumno</th>
-                        <th>Código Material</th>
-                        <th>Cantidad</th>
-                        <th>ID Solicitud</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (solicitud of solicitudes; track $index)
-                    {
-                        <tr>                    
-                            <td>{{solicitud.alumno.usuarioCodUsuario}}</td>
-                            <td>{{solicitud.material.codMaterial}}</td>
-                            <td>{{solicitud.material.nombre}}</td>
-                            <td>{{solicitud.idSolicitud}}</td>
-                            <td>{{solicitud.estado}}</td>                            
-                        </tr>
-                    }
-                </tbody>
-            </table>
+
+    <div class="content g-8 p-4">
+        <div class="row">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4>Registrar Préstamo</h4>
+                    <input type="text" class="form-control" [(ngModel)]="idMaterialSolicitude"
+                        (input)="registrarPrestamo()" size="4" placeholder="Ingresar codigo de material solicitado...">
+                    <input type="text" class="form-control" [(ngModel)]="idAlumno" (input)="registrarPrestamo()"
+                        size="4" placeholder="Ingresar codigo de Alumno...">
+
+                </div>
+                <div class="card-body">
+
+                    <table class="table table-sm text-center">
+                        <thead class="bg-info">
+                            <tr>
+                                <th>Código Alumno</th>
+                                <th>Código Material</th>
+                                <th>Cantidad</th>
+                                <th>ID Solicitud</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (solicitud of solicitudes; track $index)
+                            {
+                            <tr>
+                                <td>{{solicitud.alumno.usuarioCodUsuario}}</td>
+                                <td>{{solicitud.material.codMaterial}}</td>
+                                <td>{{solicitud.material.nombre}}</td>
+                                <td>{{solicitud.idSolicitud}}</td>
+                                <td>{{solicitud.estado}}</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
 
         </div>
-
     </div>
+
 </div>

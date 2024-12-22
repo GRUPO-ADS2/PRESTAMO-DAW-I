@@ -21,6 +21,6 @@
                 <input type="date" class="form-control"  [value]="aumentarDias(prestamo.fechaPrestamo ,7)" name="FechaDevolucion" readonly>
             </div>          
     </div>
-    <button *ngIf="option==1" class="btn btn-success btn-sm" (click)="gestionar()">Renovar</button>    
-    <button *ngIf="option==2" class="btn btn-success btn-sm" (click)="gestionar()">Devolver</button>  
+    <button *ngIf="option==1" class="btn btn-warning btn-lg" (click)="gestionar()"><i class="fas fa-sync-alt"></i>Renovar</button>    
+    <button *ngIf="option==2" class="btn btn-success btn-lg" (click)="gestionar()"><i class="fas fa-undo"></i>Devolver</button>  
 </div>

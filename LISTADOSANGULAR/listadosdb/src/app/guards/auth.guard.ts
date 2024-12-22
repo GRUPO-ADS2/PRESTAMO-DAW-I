@@ -5,10 +5,14 @@ import { AuthService } from '../listados/services/auth.service';
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const service = inject(AuthService);
-  if (inject(AuthService).user.isAuth) {
+  if (service.user.isAuth) {
     if(isTokenExpired()){
       service.logout();
       router.navigate(['/login']);
+      return false;
+    }
+    if(!service.isAdmin()){
+      router.navigate(['/403']);
       return false;
     }
     return true;

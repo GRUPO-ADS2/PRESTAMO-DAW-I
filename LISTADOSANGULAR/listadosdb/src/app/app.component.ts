@@ -74,9 +74,9 @@ export class AppComponent implements OnInit {
         
         console.log(payload);
         Swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
-          title: "Solicitud creada",
+          title: "Hola! " + user.username,
           showConfirmButton: false,
           timer: 1500
         });
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
       },
       error: error => {
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "error",
             title: error.error.message,
             showConfirmButton: false,

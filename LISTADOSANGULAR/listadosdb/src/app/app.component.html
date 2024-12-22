@@ -71,7 +71,7 @@
       </div>
     </li>
     <!-- Nav Item - Prestamos -->
-    <li class="nav-item">
+    <li class="nav-item " *ngIf="admin">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSoli" aria-expanded="true"
         aria-controls="collapseSoli">
         <i class="fa-solid fa-book-bookmark"></i>
@@ -81,25 +81,11 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Acciones:</h6>
           <a class="collapse-item" routerLinkActive="active" routerLink="/registrarPrestamo">Registrar Prestamos</a>
-          <a class="collapse-item" routerLinkActive="active" routerLink="#">Registrar Devolucion</a>
-          <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Registrar Renovacion</a>
+          <a class="collapse-item" routerLinkActive="active" routerLink="/listaprestamos">Seguimiento Prestamo</a>        
         </div>
       </div>
     </li>
-    <!-- Nav Item - Penalizaciones -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePena" aria-expanded="true"
-        aria-controls="collapsePena">
-        <i class="fa-solid fa-book-skull"></i>
-        <span>Penalizacion</span>
-      </a>
-      <div id="collapsePena" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Mis Registros:</h6>
-          <a class="collapse-item" routerLinkActive="active" routerLink="">Registrar Penalizacion</a>
-        </div>
-      </div>
-    </li>
+    
     <!-- Divider -->
     <hr class="sidebar-divider">
     <!-- Nav Item - SESSION -->

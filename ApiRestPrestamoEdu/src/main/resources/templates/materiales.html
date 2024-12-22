@@ -67,7 +67,7 @@
                 var MaterialId = button.data('id'); 
                 var modal = $(this);
                 $.ajax({
-                    url: '/material/' + MaterialId,
+                    url: '/mantenimiento/material/' + MaterialId,
                     method: 'GET',
                     success: function(data) {
                         modal.find('.modal-content').html(data);

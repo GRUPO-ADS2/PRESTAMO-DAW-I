@@ -14,10 +14,12 @@ import com.example.demo.service.IMaterialService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@RequestMapping("/mantenimiento")
 public class MaterialController {
     @Autowired
     private IMaterialService _IMaterialService;
@@ -34,7 +36,7 @@ public class MaterialController {
 	    	flash.addFlashAttribute("success",String.format(" El material %s con ID: %d, se guardó con éxito", materialTosave.getNombre(), materialTosave.getCodMaterial()));
 	    else 
 	    	 flash.addFlashAttribute("error", "error al guardar Material");	    		    	   
-        return "redirect:/materiales";
+        return "redirect:/mantenimiento/materiales";
     }
     @GetMapping("/material/{id}")
     public String getMethodName(@PathVariable Integer id, Model model) {    	

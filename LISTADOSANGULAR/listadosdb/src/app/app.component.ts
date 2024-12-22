@@ -37,17 +37,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.handlerLogin();
 
-    this.client = new Client();
-    this.client.webSocketFactory = () => {
-      return new SockJS("http://localhost:8081/chat-websocket") as unknown as IStompSocket;
-    }
+//    this.client = new Client();
+//    this.client.webSocketFactory = () => {
+      //return new SockJS("http://localhost:8081/chat-websocket") as unknown as IStompSocket;
+//    }
 
-    this.client.onConnect = (frame) => {
-      console.log('Conectados: ' + this.client.connected + ' : ' + frame);
-      this.client.subscribe('/chat/mensaje', e => {
-        console.log(e.body);
-      });
-    }
+//    this.client.onConnect = (frame) => {
+      //console.log('Conectados: ' + this.client.connected + ' : ' + frame);
+      //this.client.subscribe('/chat/mensaje', e => {
+        //console.log(e.body);
+      //});
+//    }
 
     this.client.activate();
   }

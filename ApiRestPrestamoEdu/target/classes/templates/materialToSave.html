@@ -12,7 +12,7 @@
 		</button>
 	</div>
 	<div class="modal-body" >
-		<form method="post" th:action="@{/material}" class="g-3"
+		<form method="post" th:action="@{/mantenimiento/material}" class="g-3"
 			th:object="${materialTosave}">
 			
 			<div class="mb-3 row" th:if="${materialTosave.codMaterial!=null}">

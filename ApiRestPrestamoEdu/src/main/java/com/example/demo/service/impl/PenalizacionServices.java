@@ -19,8 +19,7 @@ import java.util.Optional;
 public class PenalizacionServices implements IPenalizacionServices {
 
     IPenalizacionRepository _penalizacionRepository;
-
-    @Autowired
+ 
     public PenalizacionServices(IPenalizacionRepository penalizacionRepository){
         _penalizacionRepository = penalizacionRepository;
     }

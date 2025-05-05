@@ -16,9 +16,9 @@ import java.util.Optional;
 
 @Service
 public class PrestamoServices implements IPrestamoServices {
-    IPrestamoRepository _prestamoRepository;
+    private IPrestamoRepository _prestamoRepository;
 
-    @Autowired
+
     public PrestamoServices(IPrestamoRepository prestamoRepository){_prestamoRepository = prestamoRepository;}
 
 
@@ -28,7 +28,7 @@ public class PrestamoServices implements IPrestamoServices {
     }
     
     
-
+    @Transactional
     @Override
     public void registrarPrestamo(PresDTO presDTO) {
         try {

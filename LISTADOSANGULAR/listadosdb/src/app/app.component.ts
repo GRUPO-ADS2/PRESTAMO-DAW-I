@@ -20,7 +20,7 @@ import { response } from 'express';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink,
-    RouterLinkActive, FormsModule,CommonModule
+    RouterLinkActive, FormsModule, CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -28,71 +28,88 @@ import { response } from 'express';
 export class AppComponent implements OnInit {
 
   title = 'listadosdb';
-  private client: Client = new Client();
-  constructor(private sharingData: SharingDataService, 
-              private authServide: AuthService,
-               private route: ActivatedRoute,
-              private router: Router) { }
+  private client!: Client;
+  constructor(private sharingData: SharingDataService,
+    private authServide: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
-  ngOnInit(): void {
-    this.handlerLogin();
-
-//    this.client = new Client();
-//    this.client.webSocketFactory = () => {
-      //return new SockJS("http://localhost:8081/chat-websocket") as unknown as IStompSocket;
-//    }
-
-//    this.client.onConnect = (frame) => {
-      //console.log('Conectados: ' + this.client.connected + ' : ' + frame);
-      //this.client.subscribe('/chat/mensaje', e => {
-        //console.log(e.body);
-      //});
-//    }
-
-    this.client.activate();
-  }
+    ngOnInit(): void {
+      this.handlerLogin();
+      if (this.admin) {
+        this.client = new Client();
+        this.client.webSocketFactory = () => {        
+          return new SockJS("http://localhost:8081/chat-websocket") as IStompSocket;
+        }
+        this.client.onConnect = (frame) => {
+          console.log('Conectados: ' + this.client.connected + ' : ' + frame);
+          this.client.subscribe('/chat/admin', mensaje => {
+            console.log(mensaje.body);
+            Swal.fire({
+              position: "bottom-start",
+              width: 200,
+              heightAuto: true,
+              icon: "warning",              
+              title: mensaje.body,
+              showConfirmButton: false,
+              timer: 7500,
+              customClass: {
+                popup: 'small-alert', // Clase personalizada para el popup
+                title: 'small-alert-title', // Clase personalizada para el título
+                icon: 'small-alert-icon' // Clase personalizada para el icono
+              },
+              backdrop: false
+            });
+          });
+        };
+        this.client.onStompError = (frame) => {
+          console.log('Error: ' + frame.headers['message'] + '\n' + frame.body);
+        };
+        this.client.activate();
+      }
+    }
 
   handlerLogin() {
-    this.sharingData.handlerLoginEventEmitter.subscribe(({username,contrasenia})=>{
-    console.log(username,contrasenia)
-    
-    this.authServide.loginUser({username,contrasenia}).subscribe({
+    this.sharingData.handlerLoginEventEmitter.subscribe(({ username, contrasenia }) => {
+      console.log(username, contrasenia)
 
-      next: response => {
-        const token = response.token;
-        console.log(token);
-        const payload = this.authServide.getPayLoad(token);
+      this.authServide.loginUser({ username, contrasenia }).subscribe({
 
-        const user ={username: payload.sub}
-        const login ={
-          user,
-          isAuth:true,
-          isAdmin: payload.isAdmin
-        }
-        this.authServide.user = login;
-        this.authServide.token = token;
-        
-        console.log(payload);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Hola! " + user.username,
-          showConfirmButton: false,
-          timer: 1500
-        });
-        this.router.navigate(['/listasolicitudes']);
-      },
-      error: error => {
+        next: response => {
+          const token = response.token;
+          console.log(token);
+          const payload = this.authServide.getPayLoad(token);
+
+          const user = { username: payload.sub }
+          const login = {
+            user,
+            isAuth: true,
+            isAdmin: payload.isAdmin
+          }
+          this.authServide.user = login;
+          this.authServide.token = token;
+
+          console.log(payload);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Hola! " + user.username,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigate(['/listasolicitudes']);
+        },
+        error: error => {
           Swal.fire({
             position: "center",
             icon: "error",
             title: error.error.message,
             showConfirmButton: false,
             timer: 1500
-          });        
+          });
         }
       })
-  })
+    })
   }
 
   get admin(): boolean {
@@ -103,8 +120,9 @@ export class AppComponent implements OnInit {
     return this.authServide.authenticated();
   }
 
-  handlerLogouot(){
+  handlerLogouot() {
     this.router.navigate(['/login']);
+    this.client.deactivate();
     return this.authServide.logout();
-  }  
+  }
 }

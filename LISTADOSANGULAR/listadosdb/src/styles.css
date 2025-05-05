@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.small-alert {
+    box-shadow: none !important; /* Elimina la sombra */
+    width: 200px !important; /* Ajusta el tamaño del popup */
+    padding: 10px !important; /* Reduce el padding */
+    border-radius: 5px !important; /* Ajusta los bordes redondeados */
+  }
+  
+  .small-alert-title {
+    font-size: 8px !important; /* Ajusta el tamaño del título */
+    font-weight: normal !important; /* Cambia el peso del texto */
+  }
+  
+  .small-alert-icon {
+    font-size: 2px !important; /* Ajusta el tamaño del icono */
+    margin: 0 !important; /* Ajusta el margen del icono */
+  }

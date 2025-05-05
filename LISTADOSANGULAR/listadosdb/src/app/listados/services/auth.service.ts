@@ -8,60 +8,67 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private urlBase:string = 'http://localhost:8081';
+  constructor(private http:HttpClient) { }
   private _token: string | undefined;
   private _user: any ={
     isAuth: false,
     user: undefined,
     isAdmin : false
   }
-  constructor(private http:HttpClient) { }
 
-  loginUser({username, contrasenia}: any): Observable<any>{
-    return this.http.post<any>(this.urlBase+"/login", {username, contrasenia})
-  }
-
-  set user(user: any){
-    this._user = user;
-    sessionStorage.setItem('login', JSON.stringify(user));
-  }
-  get user(){
-    if(this._user.isAuth){
-      return this._user;
-    }else if(sessionStorage.getItem('login')){
-      this._user = JSON.parse(sessionStorage.getItem('login') || '{}');
-      return this._user;
-    }  
-    return this._user;
-
-  }
-  set token(token: string){
+  
+  
+  set token(token: string) {
     this._token = token;
-    sessionStorage.setItem('token', token);
+    if (typeof window !== 'undefined' && sessionStorage) {
+      sessionStorage.setItem('token', token);
+    }
   }
-  get token(){
-    if(this._token){
+
+  get token() {
+    if (this._token) {
       return this._token;
-    }else if(sessionStorage.getItem('token') &&typeof window !== 'undefined'){
+    } else if (typeof window !== 'undefined' && sessionStorage.getItem('token')) {
       this._token = sessionStorage.getItem('token') || '';
       return this._token;
     }
     return this._token!;
   }
 
-  getPayLoad(token: string){
-    if(token){
+  getPayLoad(token: string) {
+    if (token) {
       return JSON.parse(atob(token.split(".")[1]));
     }
     return null;
-  } 
-
-  isAdmin(): boolean{
-    return this.user.isAdmin;
-  }
-  authenticated(): boolean{
-    return this.user.isAuth;
   }
 
+  isAdmin(): boolean {
+    return this.user?.isAdmin || false;
+  }
+
+  authenticated(): boolean {
+    return this.user?.isAuth || false;
+  }
+
+  get user() {
+    if (typeof window !== 'undefined' && sessionStorage) {
+      const user = sessionStorage.getItem('user');
+      return user ? JSON.parse(user) : this._user;
+    }
+    return this._user;
+  }
+
+  set user(user: any) {
+    this._user = user;
+    if (typeof window !== 'undefined' && sessionStorage) {
+      sessionStorage.setItem('user', JSON.stringify(user));
+    }
+  }
+  
+  loginUser({username, contrasenia}: any): Observable<any>{
+    console.log(username, contrasenia);
+    return this.http.post<any>(this.urlBase+"/login", {username, contrasenia})
+  }
   logout(){
     this._user = {
       isAuth: false,
@@ -69,7 +76,7 @@ export class AuthService {
       isAdmin: false
     }
     this._token = '';
-    sessionStorage.removeItem('login');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
   }
 }

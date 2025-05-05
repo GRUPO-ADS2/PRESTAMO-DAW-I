@@ -15,8 +15,7 @@ public class ChatController {
 	@SendTo("/chat/mensaje")
 	public Message recibeMessage(Message sms) {
 		sms.setFecha(new Date().getTime());
-		sms.setBody("recibido por el broker :" +sms.getBody());
-		
+		sms.setBody("recibido por el broker :" +sms.getBody());		
 		return sms;
 	}
 }

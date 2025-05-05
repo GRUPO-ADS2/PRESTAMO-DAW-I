@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -27,6 +28,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.example.demo.jwt.filter.JwtAuthenticationFilter;
 import com.example.demo.jwt.filter.JwtValidadtionFilter;
+import com.example.demo.service.IUsuarioService;
+import com.example.demo.service.impl.UsuarioService;
 
 @Configuration
 public class SpringSecurityConfig {
@@ -38,10 +41,14 @@ public class SpringSecurityConfig {
     PasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
     }
+    
+   
 
     @Bean
-    AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-	return http.getSharedObject(AuthenticationManagerBuilder.class).build();
+    public AuthenticationManager authenticationManager(HttpSecurity http,UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
+	AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+	authBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	return authBuilder.build();
     }
 
     @Bean
@@ -71,8 +78,7 @@ public class SpringSecurityConfig {
 //		.cors(cors -> cors.configurationSource(configurationSource()))
 //		.addFilter(new JwtAuthenticationFilter(authenticationManager(http)))
 //		.addFilter(new JwtValidadtionFilter(authenticationManager(http)))
-		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
+		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))		
 		.csrf(csrf -> csrf.disable())
 		.formLogin(
 			(form) -> form.loginPage("/login").defaultSuccessUrl("/mantenimiento/materiales").permitAll())

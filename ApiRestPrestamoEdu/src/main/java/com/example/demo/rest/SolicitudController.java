@@ -32,6 +32,10 @@ public class SolicitudController {
 	}
 	
 
+	@GetMapping("/materiales")
+	public List<Material> getAllMat() {	 
+	    return solicitudServices.findAll();
+	}
 	@GetMapping("/materiales/{page}/{cat}")
 	public Page<Material> getAllMateriales(@PathVariable Integer page, @PathVariable String cat,
 			@RequestParam (required = false) String nom) {

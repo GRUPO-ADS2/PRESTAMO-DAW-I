@@ -21,4 +21,5 @@ public interface ISolicitudServices {
 	void actualizarEstadoSolicitud(Integer solicitudId, String nuevoEstado);
 	Integer updateSolicitud(Integer id, Solicitud solicitud);
 	Integer deleteSolicitud(Integer id);
+	List<Material> findAll();
 }

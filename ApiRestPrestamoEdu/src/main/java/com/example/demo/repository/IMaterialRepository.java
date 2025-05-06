@@ -15,7 +15,8 @@ import com.example.demo.models.Material;
 
 import jakarta.validation.constraints.Null;
 @Repository
-public interface IMaterialRepository extends CrudRepository<Material, Integer>{
+//public interface IMaterialRepository extends CrudRepository<Material, Integer>{
+public interface IMaterialRepository extends JpaRepository<Material, Integer>{
 	
 	@Cacheable(value = "material")
 	@Procedure(name = "filtrarMateriales")

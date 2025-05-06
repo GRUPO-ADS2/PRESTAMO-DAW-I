@@ -110,5 +110,9 @@ public class SolicitudServices implements ISolicitudServices {
             return 1;
         }).orElse(0);
     }
+    @Override
+    public List<Material> findAll() {
+	return _materialRepository.findAll();
+    }
 
 }

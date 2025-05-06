@@ -32,10 +32,10 @@ public class HikariCpConfig {
         config.setDriverClassName(dbDriver);
 
 
-        config.setMaximumPoolSize(20);
+        config.setMaximumPoolSize(10);
         config.setMinimumIdle(5);
         config.setIdleTimeout(300000);
-        config.setConnectionTimeout(30000);
+        config.setConnectionTimeout(36000000);
 
         System.out.println("###### HikariCP initialized ######");
         return new HikariDataSource(config);

@@ -80,8 +80,8 @@ public class SpringSecurityConfig {
 //		.addFilter(new JwtValidadtionFilter(authenticationManager(http)))
 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))		
 		.csrf(csrf -> csrf.disable())
-		.formLogin(
-			(form) -> form.loginPage("/login").defaultSuccessUrl("/mantenimiento/materiales").permitAll())
+//		.formLogin(
+//			(form) -> form.loginPage("/login").defaultSuccessUrl("/mantenimiento/materiales").permitAll())
 		.logout((logout) -> logout.permitAll()).build();
     }
 

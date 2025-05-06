@@ -30,6 +30,7 @@ public class SolicitudController {
 	public List<Solicitud> getAll(@PathVariable String estado) {
 		return solicitudServices.GetAllSolicitudes(estado);
 	}
+	
 
 	@GetMapping("/materiales/{page}/{cat}")
 	public Page<Material> getAllMateriales(@PathVariable Integer page, @PathVariable String cat,

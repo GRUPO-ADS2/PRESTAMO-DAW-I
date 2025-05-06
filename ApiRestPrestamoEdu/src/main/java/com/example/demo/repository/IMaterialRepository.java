@@ -19,7 +19,7 @@ public interface IMaterialRepository extends CrudRepository<Material, Integer>{
 	
 	@Cacheable(value = "material")
 	@Procedure(name = "filtrarMateriales")
-	List<Material> filtrarMateriales(String categoria, String buscar );
+	List<Material> filtrarMateriales(String p_categoria, String p_buscar );
 	
 	
 	@CacheEvict(value = "material", allEntries = true)

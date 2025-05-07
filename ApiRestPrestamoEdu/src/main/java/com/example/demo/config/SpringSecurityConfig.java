@@ -75,7 +75,7 @@ public class SpringSecurityConfig {
 //		.requestMatchers(HttpMethod.GET, "/penalizaciones").hasAnyRole("ADMIN")
 
 		.requestMatchers("/solicitudes").hasAnyRole("ADMIN").anyRequest().authenticated())
-//		.cors(cors -> cors.configurationSource(configurationSource()))
+		.cors(cors -> cors.configurationSource(configurationSource()))
 //		.addFilter(new JwtAuthenticationFilter(authenticationManager(http)))
 //		.addFilter(new JwtValidadtionFilter(authenticationManager(http)))
 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))		

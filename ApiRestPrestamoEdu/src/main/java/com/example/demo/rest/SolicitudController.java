@@ -26,6 +26,10 @@ public class SolicitudController {
     }
 
 
+    @GetMapping("/solicitudes")
+    public List<Solicitud> getAllSolicitudes() {
+	return solicitudServices.findAllSolicitudes();
+    }
 	@GetMapping("/solicitudes/{estado}")
 	public List<Solicitud> getAll(@PathVariable String estado) {
 		return solicitudServices.GetAllSolicitudes(estado);

@@ -22,4 +22,5 @@ public interface ISolicitudServices {
 	Integer updateSolicitud(Integer id, Solicitud solicitud);
 	Integer deleteSolicitud(Integer id);
 	List<Material> findAll();
+	List<Solicitud> findAllSolicitudes();
 }

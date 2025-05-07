@@ -34,8 +34,8 @@ import com.example.demo.service.impl.UsuarioService;
 @Configuration
 public class SpringSecurityConfig {
 
-//    @Value("${ORIGIN_ANGULAR}")
-//    private String origenAngular;
+    @Value("${ORIGIN_ANGULAR}")
+    private String origenAngular;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -88,7 +88,7 @@ public class SpringSecurityConfig {
     @Bean
     CorsConfigurationSource configurationSource() {
 	CorsConfiguration config = new CorsConfiguration();
-	config.setAllowedOriginPatterns(Arrays.asList("*"));
+	config.setAllowedOrigins(Arrays.asList("http://localhost:4200",origenAngular));
 	config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
 	config.setAllowedHeaders(
 		Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "X-Socket-Id", "X-Frame-Options"));

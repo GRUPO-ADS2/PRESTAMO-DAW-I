@@ -8,6 +8,7 @@ D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\controller\L
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\controller\MaterialController.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\dto\PenaDTO.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\dto\PresDTO.java
+D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\dto\RequestLogin.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\dto\SoliDTO.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\jwt\filter\JwtAuthenticationFilter.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\jwt\filter\JwtValidadtionFilter.java
@@ -28,6 +29,7 @@ D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\repository\I
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\repository\IPrestamoRepository.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\repository\ISolicitudRepository.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\repository\IUsuarioRepository.java
+D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\rest\LoginRestController.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\rest\PenalizacionController.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\rest\PrestamoController.java
 D:\DAW-I-PRESTAMO\ApiRestPrestamoEdu\src\main\java\com\example\demo\rest\SolicitudController.java

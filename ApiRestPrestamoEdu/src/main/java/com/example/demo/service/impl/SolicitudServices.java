@@ -114,5 +114,9 @@ public class SolicitudServices implements ISolicitudServices {
     public List<Material> findAll() {
 	return _materialRepository.findAll();
     }
+    @Override
+    public List<Solicitud> findAllSolicitudes() {
+	return _solicitudRepository.findAll();
+    }
 
 }
